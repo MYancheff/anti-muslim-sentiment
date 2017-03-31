@@ -1,3 +1,3 @@
-anti-muslim rhetoric
+#Anti-muslim Rhetoric
 
-Theodore Dounias
+_Theodore Dounias_
