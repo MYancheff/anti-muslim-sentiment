@@ -6,5 +6,4 @@ _Theodore Dounias_
   
 _Kristina Kutateli_
 
-The purpose of this investigation is to determine "whether there is a correlation between the amount of anti-Muslim rhetoric in the mainstream media and the number of anti-Muslim hate crimes.”
-
+The purpose of this investigation is to determine "whether there is a correlation between the amount of anti-Muslim rhetoric in the mainstream media and the number of anti-Muslim hate crimes.” Although the initial hypothesis that there is a positive correlation between anti-Muslim rhetoric and anti-Muslim hate crimes is relatively straightforward, it is not necessarily so; there are a multitude of other variables possibly correlated to this model, and we will need to create some systematized way of measuring them, and adapting our model. The bulk of the project, however, will be tidying and compiling datasets. ReThink Media will provide data about anti-Muslim rhetoric in news media, but data regarding anti-Muslim hate crimes proves to be more difficult to procure. The FBI Hate Crime Statistics dataset is the most reliable measurement, although because participation is voluntary the data set is incomplete. It is our group’s task to clean this dataset or supplement it with information from other sources. Thus we will able to assess the correlation between rhetoric and hate crimes against Muslims in America.
