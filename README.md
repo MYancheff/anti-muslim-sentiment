@@ -14,7 +14,7 @@ Timeline
  
 *4/14* -Wrangle FBI files (remove blank cells or fill in gaps with other sources, tidy)
  
-      -Import ReThink Media’s files (must fully understand NDA, tidy and make sure are compatible with wrangled FBI files)
+-Import ReThink Media’s files (must fully understand NDA, tidy and make sure are compatible with wrangled FBI files)
  
 *4/21* - Visualization and testing correlations (Andrew and Chester will be able to help us)
  
