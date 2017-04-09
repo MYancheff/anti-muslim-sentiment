@@ -50,3 +50,28 @@ for(i in seq_along(fbi_reporting)){
          ifelse(reporting_df[i, 3] == "2", reporting_df[i, 3] <- "NorthCentral", 
                 ifelse(reporting_df[i, 3] == "3", reporting_df[i, 3] <- "South", reporting_df[i, 3] <- "West")))
 }
+
+#Agency_Type Variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 4] <- substr(fbi_reporting[i], 66, 66)
+}
+
+colnames(reporting_df)[4] <- "Agency_Type"
+
+for(i in seq_along(fbi_reporting)){
+  ifelse(reporting_df[i, 4] == "0", reporting_df[i, 4] <- "CoveredbyOther", 
+         ifelse(reporting_df[i, 4] == "1", reporting_df[i, 4] <- "City", 
+                ifelse(reporting_df[i, 4] == "2", reporting_df[i, 4] <- "County", 
+                       ifelse(reporting_df[i, 4] == "3", reporting_df[i, 4] <- "Uni/Col", reporting_df[i, 4] <- "StatePolice"))))
+  }
+
+#Core_City Variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 5] <- substr(fbi_reporting[i], 67, 67)
+}
+
+colnames(reporting_df)[5] <- "Metro_Area"
+
+for(i in seq_along(fbi_reporting)){
+  ifelse(reporting_df[i, 5] == "N", reporting_df[i, 5] <- "0", reporting_df[i, 5] <- "1")
+}
