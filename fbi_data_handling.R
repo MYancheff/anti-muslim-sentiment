@@ -19,7 +19,14 @@ for(i in seq_along(full_fbi)){
   }
 }
 
-#if("Z" %in% test[i][])
+#Next section is for the creation of the fbi precincts dataframe
 
-#use substr function or stringr in tidyverse
+reporting_df <- data.frame()
+df_row_count <- 1
 
+#State code variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 1] <- substr(fbi_reporting[i], 3, 4)
+}
+
+colnames(reporting_df) <- "State_Code"
