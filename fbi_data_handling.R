@@ -30,3 +30,23 @@ for(i in seq_along(fbi_reporting)){
 }
 
 colnames(reporting_df) <- "State_Code"
+
+#State Abreviation Variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 2] <- substr(fbi_reporting[i], 5, 6)
+}
+
+colnames(reporting_df)[2] <- "State_Abr"
+
+#Country Region variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 3] <- substr(fbi_reporting[i], 65, 65)
+}
+
+colnames(reporting_df)[3] <- "Country_Region"
+
+for(i in seq_along(fbi_reporting)){
+  ifelse(reporting_df[i, 3] == "1", reporting_df[i, 3] <- "NorthEast", 
+         ifelse(reporting_df[i, 3] == "2", reporting_df[i, 3] <- "NorthCentral", 
+                ifelse(reporting_df[i, 3] == "3", reporting_df[i, 3] <- "South", reporting_df[i, 3] <- "West")))
+}
