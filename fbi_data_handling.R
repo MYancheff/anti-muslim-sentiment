@@ -2,6 +2,8 @@ full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013
 library(tidyverse)
 library(lubridate)
 
+trim.trailing <- function (x) sub("\\s+$", "", x)
+
 fbi_reporting <- vector()
 fbi_incidents <- vector()
 j <- 1
@@ -63,7 +65,7 @@ for(i in seq_along(fbi_reporting)){
          ifelse(reporting_df[i, 4] == "1", reporting_df[i, 4] <- "City", 
                 ifelse(reporting_df[i, 4] == "2", reporting_df[i, 4] <- "County", 
                        ifelse(reporting_df[i, 4] == "3", reporting_df[i, 4] <- "Uni/Col", reporting_df[i, 4] <- "StatePolice"))))
-  }
+}
 
 #Core_City Variable
 for(i in seq_along(fbi_reporting)){
@@ -79,9 +81,28 @@ for(i in seq_along(fbi_reporting)){
 #Date ORI was added var
 for(i in seq_along(fbi_reporting)){
   reporting_df[i, 6] <- substr(fbi_reporting[i], 14, 21)
-  }
+}
 
 colnames(reporting_df)[6] <- "Date_Added"
 
 reporting_df[, 6] <- ymd(reporting_df[, 6])
+
+#Date ORI went NIBRIS (????)
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 7] <- substr(fbi_reporting[i], 22, 29)
+}
+
+colnames(reporting_df)[7] <- "Date_NIBRIS"
+
+reporting_df[, 7] <- ymd(reporting_df[, 7])
+
+# 30 59
+
+#City Name
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 8] <- substr(fbi_reporting[i], 30, 59)
+  #Find a way to remove spaces
+}
+
+colnames(reporting_df)[8] <- "City_Name"
 
