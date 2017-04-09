@@ -87,12 +87,12 @@ colnames(reporting_df)[6] <- "Date_Added"
 
 reporting_df[, 6] <- ymd(reporting_df[, 6])
 
-#Date ORI went NIBRIS (????)
+#Date ORI went NIBRS (????)
 for(i in seq_along(fbi_reporting)){
   reporting_df[i, 7] <- substr(fbi_reporting[i], 22, 29)
 }
 
-colnames(reporting_df)[7] <- "Date_NIBRIS"
+colnames(reporting_df)[7] <- "Date_NIBRS"
 
 reporting_df[, 7] <- ymd(reporting_df[, 7])
 
@@ -106,3 +106,46 @@ for(i in seq_along(fbi_reporting)){
 
 colnames(reporting_df)[8] <- "City_Name"
 
+#Pop_Group Codes variable
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 9] <- substr(fbi_reporting[i], 62, 63)
+}
+
+colnames(reporting_df)[9] <- "Pop_Group_Code"
+
+#Judicial District Code
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 9] <- substr(fbi_reporting[i], 81, 84)
+}
+
+colnames(reporting_df)[9] <- "Judicial_Dist_in_State"
+
+#Is Nibrs Active?
+for(i in seq_along(fbi_reporting)){
+  ifelse(substr(fbi_reporting[i], 85, 85) == "A", reporting_df[i, 10] <- 1, reporting_df[i, 10] <- 0)
+}
+
+colnames(reporting_df)[10] <- "IsActiveNIBRS"
+
+#Current population covered
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 11] <- substr(fbi_reporting[i], 94, 100)
+}
+
+colnames(reporting_df)[11] <- "Current_Pop"
+#Find out what this means
+
+#103 105
+#FIPS County Code
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 12] <- substr(fbi_reporting[i], 256, 270)
+}
+
+colnames(reporting_df)[12] <- "FIPS_Code"
+
+#UCR County Code
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 13] <- substr(fbi_reporting[i], 103, 105)
+}
+
+colnames(reporting_df)[13] <- "UCR_Code"
