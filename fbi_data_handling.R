@@ -1,6 +1,6 @@
 full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013.txt", open = "r"), skipNul = TRUE)
-
-
+library(tidyverse)
+library(lubridate)
 
 fbi_reporting <- vector()
 fbi_incidents <- vector()
@@ -75,3 +75,13 @@ colnames(reporting_df)[5] <- "Metro_Area"
 for(i in seq_along(fbi_reporting)){
   ifelse(reporting_df[i, 5] == "N", reporting_df[i, 5] <- "0", reporting_df[i, 5] <- "1")
 }
+
+#Date ORI was added var
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 6] <- substr(fbi_reporting[i], 14, 21)
+  }
+
+colnames(reporting_df)[6] <- "Date_Added"
+
+reporting_df[, 6] <- ymd(reporting_df[, 6])
+
