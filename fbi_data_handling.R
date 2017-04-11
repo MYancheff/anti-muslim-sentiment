@@ -149,3 +149,38 @@ for(i in seq_along(fbi_reporting)){
 }
 
 colnames(reporting_df)[13] <- "UCR_Code"
+
+#MSA Code
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 14] <- substr(fbi_reporting[i], 106, 108)
+}
+
+colnames(reporting_df)[14] <- "MSA_Code"
+
+#Last Population
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 15] <- substr(fbi_reporting[i], 109, 117)
+}
+
+colnames(reporting_df)[15] <- "Last_Population"
+
+#Master File Year
+for(i in seq_along(fbi_reporting)){
+  reporting_df[i, 16] <- substr(fbi_reporting[i], 214, 217)
+}
+
+colnames(reporting_df)[16] <- "Master_File_Year"
+
+#218 225 
+#Quarters of Activity
+for(i in seq_along(fbi_reporting)){
+  c <- 0
+  for(y in c(218:221)){
+    reporting_df[i, 17 + c] <- substr(fbi_reporting[i], y, y)
+    c <- c + 1
+  }
+}
+
+
+
+
