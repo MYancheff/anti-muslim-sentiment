@@ -203,10 +203,12 @@ colnames(reporting_df)[18] <- "2"
 colnames(reporting_df)[19] <- "3"
 colnames(reporting_df)[20] <- "4"
 
+#Bind this before gathering
+reporting_df <- cbind(reporting_df, incident_no)
+
 reporting_df <- reporting_df %>%
   gather(key = Quarter, value = Incidents, 17, 18, 19, 20)
 
-reporting_df <- cbind(reporting_df, incident_no)
 
 #Next section is on the fbi incidents reported.
 
