@@ -1,6 +1,7 @@
 full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013.txt", open = "r"), skipNul = TRUE)
 library(tidyverse)
 library(lubridate)
+library(dplyr)
 
 trim.trailing <- function (x) sub("\\s+$", "", x)
 
@@ -24,7 +25,6 @@ for(i in seq_along(full_fbi)){
 #Next section is for the creation of the fbi precincts dataframe
 
 reporting_df <- data.frame()
-df_row_count <- 1
 
 #State code variable
 for(i in seq_along(fbi_reporting)){
@@ -171,7 +171,6 @@ for(i in seq_along(fbi_reporting)){
 
 colnames(reporting_df)[16] <- "Master_File_Year"
 
-#218 225 
 #Quarters of Activity
 for(i in seq_along(fbi_reporting)){
   c <- 0
@@ -181,6 +180,14 @@ for(i in seq_along(fbi_reporting)){
   }
 }
 
+colnames(reporting_df)[17] <- "1"
+colnames(reporting_df)[18] <- "2"
+colnames(reporting_df)[19] <- "3"
+colnames(reporting_df)[20] <- "4"
 
+reporting_df <- reporting_df %>%
+  gather(key = Quarter, value = Incidents, 17, 18, 19, 20)
+
+#Next section is on the fbi incidents reported.
 
 
