@@ -38,7 +38,7 @@ for(i in seq_along(full_fbi)){
 for(i in 1:15013){
   incident_no[i, 2] <- count_incidents(incident_no[i, 1])
 }
-colnames(incident_no) <- c("Number_Original_list", "Number_of_Incidents")
+colnames(incident_no) <- c("Number_Original_list", "Number_of_Incidents_Year")
 
 #Next section is for the creation of the fbi precincts dataframe
 
@@ -306,3 +306,7 @@ for(i in seq_along(fbi_incidents)){
 }
 
 colnames(incidents_df)[12] <- "Victim_Type"
+
+
+
+
