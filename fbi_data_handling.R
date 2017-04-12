@@ -3,17 +3,29 @@ library(tidyverse)
 library(lubridate)
 library(dplyr)
 
-trim.trailing <- function (x) sub("\\s+$", "", x)
+#Function that counts the nuber of incidents reported by each precinct
+count_incidents <- function(x){
+  if(substr(full_fbi[x + 1], 1, 1) == "B"){
+    return(0)
+  }
+  if(substr(full_fbi[x + 1], 1, 1) == "I"){
+    return(count_incidents(x + 1) + 1)
+  }
+}
 
+#Sets up some useful counters and variables
 fbi_reporting <- vector()
 fbi_incidents <- vector()
 j <- 1
 z <- 1
 
+incident_no <- data.frame()
+
 #creates vector with only reporting precincts
 for(i in seq_along(full_fbi)){
   if(substr(full_fbi[i], 1, 1) == "B" && substr(full_fbi[i], 218, 225) != "        "){
     fbi_reporting[j] <- full_fbi[i]
+    incident_no[j, 1] <- i
     j <- j + 1
   }
   if(substr(full_fbi[i], 1, 1) == "I"){
@@ -21,6 +33,12 @@ for(i in seq_along(full_fbi)){
   z <- z + 1
   }
 }
+
+#Counts the incidents
+for(i in 1:15013){
+  incident_no[i, 2] <- count_incidents(incident_no[i, 1])
+}
+colnames(incident_no) <- c("Number_Original_list", "Number_of_Incidents")
 
 #Next section is for the creation of the fbi precincts dataframe
 
@@ -187,6 +205,8 @@ colnames(reporting_df)[20] <- "4"
 
 reporting_df <- reporting_df %>%
   gather(key = Quarter, value = Incidents, 17, 18, 19, 20)
+
+reporting_df <- cbind(reporting_df, incident_no)
 
 #Next section is on the fbi incidents reported.
 
