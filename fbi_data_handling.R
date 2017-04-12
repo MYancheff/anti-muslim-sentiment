@@ -147,7 +147,7 @@ colnames(reporting_df)[10] <- "IsActiveNIBRS"
 
 #Current population covered
 for(i in seq_along(fbi_reporting)){
-  reporting_df[i, 11] <- substr(fbi_reporting[i], 94, 100)
+  reporting_df[i, 11] <- as.integer(substr(fbi_reporting[i], 94, 100))
 }
 
 colnames(reporting_df)[11] <- "Current_Pop"
@@ -177,7 +177,7 @@ colnames(reporting_df)[14] <- "MSA_Code"
 
 #Last Population
 for(i in seq_along(fbi_reporting)){
-  reporting_df[i, 15] <- substr(fbi_reporting[i], 109, 117)
+  reporting_df[i, 15] <- as.integer(substr(fbi_reporting[i], 109, 117))
 }
 
 colnames(reporting_df)[15] <- "Last_Population"
