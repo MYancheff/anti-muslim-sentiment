@@ -1,0 +1,255 @@
+---
+title: "CensusJoin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+library(readxl)
+library(xlsx)
+library(datasets)
+library(dplyr)
+library(magrittr)
+library(markdown)
+library(methods)
+library(readr)
+library(readxl)
+library(stringr)
+library(tibble)
+library(tidyr)
+
+```
+
+Import and tidy SocialExplorer data
+
+```{r, import}
+RelAlabama <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelAlabama.xls", skip = 1, sheet = "Sheet1")
+
+#Chester fixes 1-3 problem
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelAlabama)[i + 1] <- names(RelAlabama)[i]
+  names(RelAlabama)[i + 2] <- names(RelAlabama)[i]
+}
+
+names(RelAlabama) <- make.names(names(RelAlabama), unique = TRUE)
+
+RelAlabama <- RelAlabama %>% 
+  slice(c(3, 20))
+
+#transpose
+religion_long <- t(RelAlabama) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  #tidy
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Alabama", ""))
+
+```
+
+Import FIPS. Unite 
+
+```{r}
+
+FIPS <- read_excel("/Users/emilyclark/Desktop/Junior/States/US_FIPS_Codes.xls", col_names = FALSE) 
+
+
+FIPSAl <- FIPS %>% filter(X1 == "Alabama") %>%
+   rename(state = X1, county = X2, StateFIPS = X3, CountyFIPS = X4) %>%
+   select(-`state`) %>%
+   unite(FIPS, StateFIPS, CountyFIPS, sep = "")
+
+```
+
+Import total population
+```{r}
+totalpop <- read_excel("/Users/emilyclark/Desktop/Junior/States/PopAlabama.xls", skip = 1, sheet = "Sheet1")
+
+totalpop_long <- t(totalpop) %>%
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  rename(TotalPop = X3, PopDensity = X4, Area = X5) %>%
+  select(`county`, `TotalPop`, `PopDensity`, `Area`) %>%
+  mutate(county = str_replace_all(county, " County, Alabama", ""))
+
+
+```
+
+Join
+```{r}
+relFIPS <- religion_long %>% left_join(FIPSAl, by="county")
+relFIPSpop <- relFIPS %>% left_join(totalpop_long, by = "county")
+
+```
+
+```{r, Alaska}
+
+#Import and tidy SocialExplorer data
+RelAlaska <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelAlaska.xls", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelAlaska)[i + 1] <- names(RelAlaska)[i]
+  names(RelAlaska)[i + 2] <- names(RelAlaska)[i]
+}
+
+names(RelAlaska) <- make.names(names(RelAlaska), unique = TRUE)
+
+RelAlaska <- RelAlaska %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelAlaska) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Alaska", ""))
+
+```
+
+```{r, Arizona}
+#Import and tidy SocialExplorer data
+RelArizona <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelArizona.xls", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelArizona)[i + 1] <- names(RelArizona)[i]
+  names(RelArizona)[i + 2] <- names(RelArizona)[i]
+}
+
+names(RelArizona) <- make.names(names(RelArizona), unique = TRUE)
+
+RelArizona <- RelArizona %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelArizona) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Arizona", ""))
+
+```
+
+```{r, Arkansas}
+#Import and tidy SocialExplorer data
+RelArkansas <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelArkansas.xls", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelArkansas)[i + 1] <- names(RelArkansas)[i]
+  names(RelArkansas)[i + 2] <- names(RelArkansas)[i]
+}
+
+names(RelArkansas) <- make.names(names(RelArkansas), unique = TRUE)
+
+RelArkansas <- RelArkansas %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelArkansas) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Arkansas", ""))
+
+```
+
+
+```{r, California}
+#Import and tidy SocialExplorer data
+RelCalifornia <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelCalifornia.xls", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelCalifornia)[i + 1] <- names(RelCalifornia)[i]
+  names(RelCalifornia)[i + 2] <- names(RelCalifornia)[i]
+}
+
+names(RelCalifornia) <- make.names(names(RelCalifornia), unique = TRUE)
+
+RelCalifornia <- RelCalifornia %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelCalifornia) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..California", ""))
+
+```
+
+
+```{r, Florida}
+#Import and tidy SocialExplorer data
+RelFl <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelArkansas.xls", skip = 1, sheet = "Sheet3")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelFl)[i + 1] <- names(RelFl)[i]
+  names(RelFl)[i + 2] <- names(RelFl)[i]
+}
+
+names(RelFl) <- make.names(names(RelFl), unique = TRUE)
+
+RelFl <- RelFl %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelFl) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Florida", ""))
+
+```
+
+```{r, Georgia}
+#Import and tidy SocialExplorer data
+RelCalifornia <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelArkansas.xls", skip = 1, sheet = "Sheet4")
+
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelGeorgia)[i + 1] <- names(RelGeorgia)[i]
+  names(RelGeorgia)[i + 2] <- names(RelGeorgia)[i]
+}
+
+names(RelGeorgia) <- make.names(names(RelGeorgia), unique = TRUE)
+
+RelGeorgia <- RelGeorgia %>% 
+  slice(c(3, 20))
+
+religion_long <- t(RelGeorgia) %>% 
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>% 
+  
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>% 
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".County..Georgia", ""))
+
+```
