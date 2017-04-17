@@ -70,7 +70,6 @@ Repeats five times because agencies cover as many as five counties.
 3-4 NUMERIC STATE CODE,  
 FIPS code.
 
-<<<<<<< HEAD
 5-23 ORIGINATING AGENCY IDENTIFIER,  
 Identifies agency under which the reported hate crime incident occured.  
 
@@ -79,13 +78,12 @@ Date when incident occurred. Format: YYYYMMDD.
 
 25 QUARTER OF THE YEAR,  
 Quarter of the year in which the incident occurred (January-March, etc.)  
-=======
+
 5-13 ORIGINATING AGENCY IDENTIFIER,
 
 26-33 INCIDENT DATE,
 
 35 QUARTER OF THE YEAR,
->>>>>>> 3fc4b9b2b21b9a1ec157778e8aa11eb52c7f2f53
 
 36-38 TOTAL NUMBER OF INDIVIDUAL VICTIMS,
 
