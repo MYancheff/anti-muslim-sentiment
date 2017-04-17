@@ -3,7 +3,7 @@ library(lubridate)
 library(dplyr)
 
 
-fbi_import <- function (full_fbi){
+fbi_import_reporting <- function (full_fbi){
   #Function that counts the nuber of incidents reported by each precinct
   count_incidents <- function(x){
     if(substr(full_fbi[x + 1], 1, 1) == "B"){
@@ -218,7 +218,11 @@ fbi_import <- function (full_fbi){
     gather(key = Quarter, value = Incidents, 18, 19, 20, 21)
   
   
-  #Next section is on the fbi incidents reported.
+  return(reporting_df)
+}  
+
+#Next section is on the fbi incidents reported.
+fbi_import_incidents <- function(full_fbi){  
   
   incidents_df <- data.frame()
   
@@ -307,6 +311,13 @@ fbi_import <- function (full_fbi){
   }
   
   colnames(incidents_df)[12] <- "Victim_Type"
-} 
-  
-  
+}
+
+#Join
+
+incidents_full <- rbind(incidents_df_2011, incidents_df_2012, incidents_df_2013)
+reporting_full <- rbind(reporting_df_2011, reporting_df_2012, reporting_df_2013)
+
+write.csv(incidents_full, "hatecrime_incidents_2011to13.csv")
+write.csv(reporting_full, "hatecrime_reporters_2011to13.csv")
+
