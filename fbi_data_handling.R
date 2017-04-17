@@ -313,6 +313,15 @@ fbi_import_incidents <- function(full_fbi){
   colnames(incidents_df)[12] <- "Victim_Type"
 }
 
+incidents_df_2011 <- fbi_import_incidents(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HCRENC11.DAT"))
+incidents_df_2011 <- fbi_import_reporting(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HCRENC11.DAT"))
+
+incidents_df_2012 <- fbi_import_incidents(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HCRENC12.DAT"))
+incidents_df_2012 <- fbi_import_reporting(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HCRENC12.DAT"))
+
+incidents_df_2013 <- fbi_import_incidents(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HC 2013.TXT"))
+incidents_df_2013 <- fbi_import_reporting(read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\HC 2013.TXT"))
+
 #Join
 
 incidents_full <- rbind(incidents_df_2011, incidents_df_2012, incidents_df_2013)
