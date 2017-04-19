@@ -1,18 +1,37 @@
----
-title: "Mean Hatecrime Rates by US Region"
-author: "Theodore Dounias"
-date: "April 18, 2017"
-output: github_document
----
+Mean Hatecrime Rates by US Region
+================
+Theodore Dounias
+April 18, 2017
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+``` r
+library(tidyverse)
 ```
 
-```{r, cache = TRUE, warning= FALSE, error= FALSE}
-library(tidyverse)
+    ## Loading tidyverse: ggplot2
+    ## Loading tidyverse: tibble
+    ## Loading tidyverse: tidyr
+    ## Loading tidyverse: readr
+    ## Loading tidyverse: purrr
+    ## Loading tidyverse: dplyr
+
+    ## Conflicts with tidy packages ----------------------------------------------
+
+    ## filter(): dplyr, stats
+    ## lag():    dplyr, stats
+
+``` r
 library(tidyr)
 library(lubridate)
+```
+
+    ## 
+    ## Attaching package: 'lubridate'
+
+    ## The following object is masked from 'package:base':
+    ## 
+    ##     date
+
+``` r
 library(ggplot2)
 
 #Read Incident Files
@@ -59,3 +78,4 @@ ggplot(viz1_1, aes(Year, Rate, col = Type, group = Type)) +
   labs(y = "Mean Rates of Hatecrimes by Population", title = "Mean Hatecrime Rates by US Region")
 ```
 
+![](HateCrime_Means_Region_files/figure-markdown_github/unnamed-chunk-1-1.png)
