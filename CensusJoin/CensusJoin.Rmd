@@ -1,0 +1,198 @@
+---
+title: "CensusJoin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+library(readxl)
+library(xlsx)
+library(datasets)
+library(dplyr)
+library(magrittr)
+library(markdown)
+library(methods)
+library(readr)
+library(readxl)
+library(stringr)
+library(tibble)
+library(tidyr)
+
+```
+
+Import and tidy SocialExplorer data
+
+```{r, Al to CO}
+#RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/ALtoCO2.xlsx", skip = 1, sheet = "Sheet1")
+
+
+#Chester fixes 1-3 problem
+
+#for(i in seq(from = 2, to = 205, by = 3)){
+  #names(RelALtoCO)[i + 1] <- names(RelALtoCO)[i]
+  #names(RelALtoCO)[i + 2] <- names(RelALtoCO)[i]
+#}
+
+#names(RelALtoCO) <- make.names(names(RelALtoCO), unique = TRUE)
+
+#RelALtoCO <- RelALtoCO %>% 
+  #slice(c(3, 20))
+#transpose
+
+#RelALtoCO <- t(RelALtoCO) %>%
+   #data.frame() %>% 
+  #rownames_to_column(var = "county") %>%
+  #slice(-1) %>% 
+  #rename(relig = X1, muslim = X2) %>%
+  #spread(key = relig, value= muslim) %>%
+  #mutate(county = str_replace_all(county, ".1", "")) %>% 
+  #mutate(county = str_replace_all(county, ".2", ""))
+  
+
+
+```
+
+
+
+```{r, CN to ILL}
+
+RelCNtoILL<- read_excel("/Users/emilyclark/Desktop/Junior/States/CNtoILL.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 1420, by = 3)){
+  names(RelCNtoILL)[i + 1] <- names(RelCNtoILL)[i]
+  names(RelCNtoILL)[i + 2] <- names(RelCNtoILL)[i]
+}
+
+names(RelCNtoILL) <- make.names(names(RelCNtoILL), unique = TRUE)
+
+RelCNtoILL <- RelCNtoILL %>% 
+  slice(c(3, 20))
+
+RelCNtoILL <- t(RelCNtoILL) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+```
+
+```{r, Indiana to Minnesota}
+RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 2063, by = 3)){
+  names(RelINtoMI)[i + 1] <- names(RelINtoMI)[i]
+  names(RelINtoMI)[i + 2] <- names(RelINtoMI)[i]
+}
+
+names(RelINtoMI) <- make.names(names(RelINtoMI), unique = TRUE)
+
+RelINtoMI <- RelINtoMI %>% 
+  slice(c(3, 20))
+
+RelINtoMI <- t(RelINtoMI) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+
+```{r, Mississippi to Washingtion}
+RelMISStoWA<- read_excel("/Users/emilyclark/Desktop/Junior/States/MISStoWA.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 5079, by = 3)){
+  names(RelMISStoWA)[i + 1] <- names(RelMISStoWA)[i]
+  names(RelMISStoWA)[i + 2] <- names(RelMISStoWA)[i]
+}
+
+names(RelMISStoWA) <- make.names(names(RelMISStoWA), unique = TRUE)
+
+RelMISStoWA <- RelMISStoWA %>% 
+  slice(c(3, 20))
+
+RelMISStoWA <- t(RelMISStoWA) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+```{r, West Virgina to Wyoming}
+RelWVtoWY<- read_excel("/Users/emilyclark/Desktop/Junior/States/WeVtoWY.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 453, by = 3)){
+  names(RelWVtoWY)[i + 1] <- names(RelWVtoWY)[i]
+  names(RelWVtoWY)[i + 2] <- names(RelWVtoWY)[i]
+}
+
+names(RelWVtoWY) <- make.names(names(RelWVtoWY), unique = TRUE)
+
+RelWVtoWY <- RelWVtoWY %>% 
+  slice(c(3, 20))
+
+RelWVtoWY <- t(RelWVtoWY) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+
+```{r, bind}
+
+bind_states <- rbind(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY)
+
+
+```
+
+
+Import FIPS. Unite 
+
+```{r}
+
+#FIPS <- read_excel("/Users/emilyclark/Desktop/Junior/States/US_FIPS_Codes.xls", col_names = FALSE) 
+
+
+#FIPSAl <- FIPS %>% filter(X1 == "Alabama") %>%
+   #rename(state = X1, county = X2, StateFIPS = X3, CountyFIPS = X4) %>%
+   #select(-`state`) %>%
+   #unite(FIPS, StateFIPS, CountyFIPS, sep = "")
+
+```
+
+Import total population
+```{r}
+#totalpop <- read_excel("/Users/emilyclark/Desktop/Junior/States/PopAlabama.xls", skip = 1, sheet = "Sheet1")
+
+#totalpop_long <- t(totalpop) %>%
+  #data.frame() %>% 
+  #rownames_to_column(var = "county") %>%
+  #rename(TotalPop = X3, PopDensity = X4, Area = X5) %>%
+  #select(`county`, `TotalPop`, `PopDensity`, `Area`) %>%
+  #mutate(county = str_replace_all(county, " County, Alabama", ""))
+
+
+```
+
+Join
+```{r}
+relFIPS <- RelAlabama %>% left_join(FIPSAl, by="county")
+#relFIPSpop <- relFIPS %>% left_join(totalpop_long, by = "county")
+
+```
