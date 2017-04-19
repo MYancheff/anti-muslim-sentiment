@@ -15,10 +15,6 @@ library(ggplot2)
 ```
 
 ```{r, cache = TRUE, warning= FALSE, error= FALSE}
-library(tidyverse)
-library(tidyr)
-library(lubridate)
-library(ggplot2)
 
 #Read Incident Files
 incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_incidents_2011to13.csv")
