@@ -2,31 +2,45 @@ library(tidyverse)
 library(tidyr)
 library(lubridate)
 
-file.choose()
+
 incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\hatecrime_incidents_2011to13.csv")
 reporting_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\hatecrime_reporters_2011to13.csv")
-
+popdata_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\Population_data.csv")
 
 #Visualization 1
+viz1 <- incidents_df %>%
+  mutate(Year = year(Incident_Date), count = 1) %>%
+  group_by(State_Code, Year) %>%
+  summarize(No_Non_Muslim = sum(Anti_Muslim == "N"), No_Muslim = sum(Anti_Muslim == "Y"))
 
-#Year, Metro Area, Number of Incidents
-reporting_df_1 <- reporting_df %>%
-group_by(Metro_Area, Master_File_Year) %>%
-summarize(Incidents = sum(Number_of_Incidents_Year, na.rm = TRUE))
+region <- reporting_df %>%
+  filter(State_Code < 51) %>%
+  group_by(State_Code, Master_File_Year, Country_Region) %>%
+  summarize()
 
-reporting_df_1$Metro_Area <- as.factor(reporting_df_1$Metro_Area)
-reporting_df_1$Master_File_Year <- as.factor(reporting_df_1$Master_File_Year) 
+viz1[, 5] <- region[, 3]
 
-ggplot(reporting_df_1, aes(Master_File_Year, Incidents, col = Metro_Area, fill = Metro_Area)) +
-  geom_point()
+total_pop <- popdata_df %>%
+  group_by(Geo_STATE) %>%
+  summarize(total_pop = sum(SE_T001_001)) %>%
+  rename(State_Code = Geo_STATE)
 
-#OR
+viz1 <- inner_join(viz1, total_pop, by = "State_Code")
 
-#Year, number of Incidents, Race of Offender
-incidents_df_1 <- incidents_df %>%
+viz1_1 <- viz1 %>%
+  mutate(HC_by_pop_nonM = No_Non_Muslim / total_pop, HC_by_pop_M = No_Muslim / total_pop) %>%
+  group_by(Country_Region, Year) %>%
+  summarize(Mean_Rate_Muslim = mean(HC_by_pop_M), Mean_Rate_Non_Muslim = mean(HC_by_pop_nonM))
+
+
+
+#Visualization 2
+incidents_df_2 <- incidents_df %>%
   filter(Anti_Muslim == "Y") %>%
   mutate(Year = year(Incident_Date), count = 1) %>%
   group_by(Year, Quarter) %>%
   summarize(Number_of_Incidents = sum(count))
 
-  #Visualization 2
+
+
+ 
