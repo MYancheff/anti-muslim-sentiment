@@ -68,6 +68,8 @@ read_var <- function(data, varname, start, end){
   #State code variable
   reporting_df[, 1] <- read_var(fbi_reporting, "State_Code", 3, 4)
   
+  colnames(reporting_df) [1] <- "State_Code"
+  
   #State Abreviation Variable
   reporting_df[, 2] <- read_var(fbi_reporting, "State_Abr", 5, 6)
   
@@ -170,9 +172,7 @@ read_var <- function(data, varname, start, end){
 
 
 #Next section is on the fbi incidents reported.
-fbi_import_incidents <- function(full_fbi){  
   
-  fbi_incidents <- vector()
  
   incidents_df <- data.frame()
   
@@ -181,76 +181,42 @@ fbi_import_incidents <- function(full_fbi){
   }
   
   #State Code
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 1] <- substr(fbi_incidents[i], 3, 4)
-  }
+  incidents_df[, 1] <- read_var(fbi_incidents, "State_Code", 3, 4)
   
-  colnames(incidents_df) <- "State_Code"
+  colnames(incidents_df) [1] <- "State_Code"
   
   #Agency ID
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 2] <- substr(fbi_incidents[i], 5, 13)
-  }
-  
-  colnames(incidents_df)[2] <- "Agency_ID"
+  incidents_df[, 2] <- read_var(fbi_incidents, "Agency_ID", 5, 13)
   
   #Incident Date
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 3] <- substr(fbi_incidents[i], 26, 33)
-  }
+  incidents_df[, 3] <- read_var(fbi_incidents, "Incident_Date", 26, 33)
   
   incidents_df[, 3] <- ymd(incidents_df[, 3])
   
-  colnames(incidents_df)[3] <- "Incident_Date"
-  
   #Quarter
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 4] <- substr(fbi_incidents[i], 35, 35)
-  }
-  
-  colnames(incidents_df)[4] <- "Quarter"
+  incidents_df[, 4] <- read_var(fbi_incidents, "Quarter", 35, 35)
   
   #Number of Victims
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 5] <- as.integer(substr(fbi_incidents[i], 36, 38))
-  }
+  incidents_df[, 5] <- read_var(fbi_incidents, "Victims", 36, 38)
   
-  colnames(incidents_df)[5] <- "Victims"
+  incidents_df[, 5] <- as.integer(incidents_df[, 5])
   
   #Offenders number
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 6] <- as.integer(substr(fbi_incidents[i], 39, 40))
-  }
+  incidents_df[, 6] <- read_var(fbi_incidents, "Offenders", 39, 40)
   
-  colnames(incidents_df)[6] <- "Offenders"
+  incidents_df[, 6] <- as.integer(incidents_df[, 6])
   
   #Offender's Race
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 7] <- substr(fbi_incidents[i], 41, 41)
-  }
-  
-  colnames(incidents_df)[7] <- "Offender_Race"
+  incidents_df[, 7] <- read_var(fbi_incidents, "Offenders_Race", 41, 41)
   
   #UCR Offense Code
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 8] <- substr(fbi_incidents[i], 42, 44)
-  }
-  
-  colnames(incidents_df)[8] <- "UCR_Code"
+  incidents_df[, 8] <- read_var(fbi_incidents, "UCR_Code", 42, 44)
   
   #Location
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 9] <- substr(fbi_incidents[i], 48, 49)
-  }
-  
-  colnames(incidents_df)[9] <- "Location_Code"
+  incidents_df[, 9] <- read_var(fbi_incidents, "Location_Code", 48, 49)
   
   #Bias Motivation
-  for(i in seq_along(fbi_incidents)){
-    incidents_df[i, 10] <- substr(fbi_incidents[i], 50, 51)
-  }
-  
-  colnames(incidents_df)[10] <- "Bias_Motivation"
+  incidents_df[, 10] <- read_var(fbi_incidents, "Bias_Motivation", 50, 51)
   
   #Is it anti-Muslim?
   for(i in seq_along(fbi_incidents)){
@@ -265,7 +231,9 @@ fbi_import_incidents <- function(full_fbi){
   }
   
   colnames(incidents_df)[12] <- "Victim_Type"
-}
+  
+  incidents_df[, 12] <- read_var(fbi_incidents, "Victim_Type", 52, 59)
+
 
 #Join
 
