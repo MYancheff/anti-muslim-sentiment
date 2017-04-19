@@ -24,8 +24,9 @@ ggplot(reporting_df_1, aes(Master_File_Year, Incidents, col = Metro_Area, fill =
 
 #Year, number of Incidents, Race of Offender
 incidents_df_1 <- incidents_df %>%
+  filter(Anti_Muslim == "Y") %>%
   mutate(Year = year(Incident_Date), count = 1) %>%
-  group_by(Year, Offender_Race) %>%
+  group_by(Year, Quarter) %>%
   summarize(Number_of_Incidents = sum(count))
 
   #Visualization 2
