@@ -24,33 +24,143 @@ library(tidyr)
 
 Import and tidy SocialExplorer data
 
-```{r, import, TIDY CENSUS DATA}
-RelAlabama <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelAlabama.xls", skip = 1, sheet = "Sheet1")
+```{r, Al to CO}
+#RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/ALtoCO2.xlsx", skip = 1, sheet = "Sheet1")
 
 
 #Chester fixes 1-3 problem
 
-for(i in seq(from = 2, to = 205, by = 3)){
-  names(RelAlabama)[i + 1] <- names(RelAlabama)[i]
-  names(RelAlabama)[i + 2] <- names(RelAlabama)[i]
-}
+#for(i in seq(from = 2, to = 205, by = 3)){
+  #names(RelALtoCO)[i + 1] <- names(RelALtoCO)[i]
+  #names(RelALtoCO)[i + 2] <- names(RelALtoCO)[i]
+#}
 
-names(RelAlabama) <- make.names(names(RelAlabama), unique = TRUE)
+#names(RelALtoCO) <- make.names(names(RelALtoCO), unique = TRUE)
 
-RelAlabama <- RelAlabama %>% 
-  slice(c(3, 20))
+#RelALtoCO <- RelALtoCO %>% 
+  #slice(c(3, 20))
 #transpose
 
-RelAlabama <- t(RelAlabama) %>% 
-  data.frame() %>% 
-  rownames_to_column(var = "county") %>% 
-  slice(-1) %>% 
-  rename(relig = X1, muslim = X2) %>% 
-  mutate(county = str_replace_all(county, ".1", "")) %>% 
-  mutate(county = str_replace_all(county, ".2", "")) %>%
-  spread(key = relig, value= muslim) %>%
-  mutate(county = str_replace_all(county, " .County..Alabama", ""))
+#RelALtoCO <- t(RelALtoCO) %>%
+   #data.frame() %>% 
+  #rownames_to_column(var = "county") %>%
+  #slice(-1) %>% 
+  #rename(relig = X1, muslim = X2) %>%
+  #spread(key = relig, value= muslim) %>%
+  #mutate(county = str_replace_all(county, ".1", "")) %>% 
+  #mutate(county = str_replace_all(county, ".2", ""))
+  
+
+
 ```
+
+
+
+```{r, CN to ILL}
+
+RelCNtoILL<- read_excel("/Users/emilyclark/Desktop/Junior/States/CNtoILL.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 1420, by = 3)){
+  names(RelCNtoILL)[i + 1] <- names(RelCNtoILL)[i]
+  names(RelCNtoILL)[i + 2] <- names(RelCNtoILL)[i]
+}
+
+names(RelCNtoILL) <- make.names(names(RelCNtoILL), unique = TRUE)
+
+RelCNtoILL <- RelCNtoILL %>% 
+  slice(c(3, 20))
+
+RelCNtoILL <- t(RelCNtoILL) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+```
+
+```{r, Indiana to Minnesota}
+RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 2063, by = 3)){
+  names(RelINtoMI)[i + 1] <- names(RelINtoMI)[i]
+  names(RelINtoMI)[i + 2] <- names(RelINtoMI)[i]
+}
+
+names(RelINtoMI) <- make.names(names(RelINtoMI), unique = TRUE)
+
+RelINtoMI <- RelINtoMI %>% 
+  slice(c(3, 20))
+
+RelINtoMI <- t(RelINtoMI) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+
+```{r, Mississippi to Washingtion}
+RelMISStoWA<- read_excel("/Users/emilyclark/Desktop/Junior/States/MISStoWA.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 5079, by = 3)){
+  names(RelMISStoWA)[i + 1] <- names(RelMISStoWA)[i]
+  names(RelMISStoWA)[i + 2] <- names(RelMISStoWA)[i]
+}
+
+names(RelMISStoWA) <- make.names(names(RelMISStoWA), unique = TRUE)
+
+RelMISStoWA <- RelMISStoWA %>% 
+  slice(c(3, 20))
+
+RelMISStoWA <- t(RelMISStoWA) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+```{r, West Virgina to Wyoming}
+RelWVtoWY<- read_excel("/Users/emilyclark/Desktop/Junior/States/WeVtoWY.xlsx", skip = 1, sheet = "Sheet1")
+
+for(i in seq(from = 2, to = 453, by = 3)){
+  names(RelWVtoWY)[i + 1] <- names(RelWVtoWY)[i]
+  names(RelWVtoWY)[i + 2] <- names(RelWVtoWY)[i]
+}
+
+names(RelWVtoWY) <- make.names(names(RelWVtoWY), unique = TRUE)
+
+RelWVtoWY <- RelWVtoWY %>% 
+  slice(c(3, 20))
+
+RelWVtoWY <- t(RelWVtoWY) %>%
+   data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", "")) 
+
+```
+
+
+```{r, bind}
+
+bind_states <- rbind(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY)
+
+
+```
+
 
 Import FIPS. Unite 
 
@@ -82,283 +192,8 @@ Import total population
 
 Join
 ```{r}
-#relFIPS <- RelAlabama %>% left_join(FIPSAl, by="county")
+relFIPS <- RelAlabama %>% left_join(FIPSAl, by="county")
 #relFIPSpop <- relFIPS %>% left_join(totalpop_long, by = "county")
-
-```
-
-
-```{r, Alaska}
-
-
-```
-
-```{r, Arizona}
-
-
-```
-
-
-```{r, Arkansas}
-
-
-```
-
-```{r, California}
-
-
-```
-
-
-```{r, Colorado}
-
-
-
-```
-
-
-```{r, Connecticut}
-
-
-
-```
-
-```{r, Delaware}
-
-
-```
-
-```{r, Florida}
-
-
-```
-
-
-```{r, Georgia}
-
-
-
-```
-
-
-```{r, Hawaii}
-
-
-```
-
-```{r, Idaho}
-
-
-```
-
-```{r, Illinois}
-
-
-```
-
-```{r, Indiana}
-
-
-```
-
-```{r, Iowa}
-
-
-
-```
-
-
-```{r, Kansas}
-
-
-```
-
-
-```{r, Kentucky}
-
-
-```
-
-```{r, Louisiana}
-
-
-```
-
-
-```{r, Maine}
-
-
-```
-
-
-```{r, Maryland}
-
-
-```
-
-```{r, Massachusetts}
-
-
-```
-
-```{r, Michigan}
-
-
-
-```
-
-
-```{r, Minnesota}
-
-```
-
-```{r, Mississippi}
-
-
-```
-
-```{r, Missouri}
-
-
-```
-
-
-```{r, Montana}
-
-
-```
-
-
-```{r, Nebraska}
-
-
-
-```
-
-```{r, Nevada}
-
-
-```
-
-
-```{r, New Hampshire}
-
-
-
-```
-
-
-```{r, New Jersey}
-
-
-```
-
-```{r, New Mexico}
-
-
-```
-
-
-```{r, New York}
-
-
-```
-
-
-```{r, North Carolina}
-
-
-```
-
-
-```{r, North Dakota}
-
-
-```
-
-
-```{r, Ohio}
-
-
-```
-
-```{r, Oklahoma}
-
-
-```
-
-
-```{r, Oregon}
-
-
-```
-
-
-```{r, Pennsyvania}
-
-
-```
-
-```{r, Rhode Island}
-
-
-```
-
-```{r, South Carolina}
-
-
-```
-
-
-```{r, South Dakota}
-
-
-```
-
-
-```{r, Tennessee}
-
-
-```
-
-```{r, Texas}
-
-
-```
-
-```{r, Utah}
-
-
-```
-
-
-```{r, Vermont}
-
-
-```
-
-```{r, Virgina}
-
-
-```
-
-```{r, Washington}
-
-
-```
-
-```{r, West Virgina}
-
-
-```
-
-```{r, Wisconsin}
-
-
-```
-
-
-```{r, Wyoming}
 
 ```
 
