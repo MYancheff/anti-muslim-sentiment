@@ -2,17 +2,32 @@ library(tidyverse)
 library(lubridate)
 library(dplyr)
 
+full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013.txt", open = "r"), skipNul = TRUE)
 
-fbi_import_reporting <- function (full_fbi){
-  #Function that counts the nuber of incidents reported by each precinct
-  count_incidents <- function(x){
-    if(substr(full_fbi[x + 1], 1, 1) == "B"){
-      return(0)
-    }
-    if(substr(full_fbi[x + 1], 1, 1) == "I"){
-      return(count_incidents(x + 1) + 1)
-    }
+#Function that counts the nuber of incidents reported by each precinct
+count_incidents <- function(x){
+  if(substr(full_fbi[x + 1], 1, 1) == "B"){
+    return(0)
   }
+  if(substr(full_fbi[x + 1], 1, 1) == "I"){
+    return(count_incidents(x + 1) + 1)
+  }
+}
+
+
+#Function for reading data into individual datasets
+read_var <- function(data, varname, start, end){
+  df <- data.frame()
+  for(i in seq_along(data)){
+    df[i, 1] <- substr(data[i], start, end)
+  }
+  
+  colnames(df) <- varname
+  return(df)
+}
+
+
+#Create the reporters dataset
   
   #Sets up some useful counters and variables
   fbi_reporting <- vector()
@@ -35,8 +50,9 @@ fbi_import_reporting <- function (full_fbi){
     }
   }
   
+  
   #Counts the incidents
-  for(i in 1:15013){
+  for(i in seq_along(fbi_reporting)){
     incident_no[i, 2] <- count_incidents(incident_no[i, 1])
   }
   colnames(incident_no) <- c("Number_Original_list", "Number_of_Incidents_Year")
@@ -45,26 +61,18 @@ fbi_import_reporting <- function (full_fbi){
   
   reporting_df <- data.frame()
   
-  #State code variable
   for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 1] <- substr(fbi_reporting[i], 3, 4)
+    reporting_df[i, 1] <- i
   }
   
-  colnames(reporting_df) <- "State_Code"
+  #State code variable
+  reporting_df[, 1] <- read_var(fbi_reporting, "State_Code", 3, 4)
   
   #State Abreviation Variable
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 2] <- substr(fbi_reporting[i], 5, 6)
-  }
-  
-  colnames(reporting_df)[2] <- "State_Abr"
+  reporting_df[, 2] <- read_var(fbi_reporting, "State_Abr", 5, 6)
   
   #Country Region variable
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 3] <- substr(fbi_reporting[i], 65, 65)
-  }
-  
-  colnames(reporting_df)[3] <- "Country_Region"
+  reporting_df[, 3] <- read_var(fbi_reporting, "Country_Region", 65, 65)
   
   for(i in seq_along(fbi_reporting)){
     ifelse(reporting_df[i, 3] == "1", reporting_df[i, 3] <- "NorthEast", 
@@ -73,11 +81,7 @@ fbi_import_reporting <- function (full_fbi){
   }
   
   #Agency_Type Variable
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 4] <- substr(fbi_reporting[i], 66, 66)
-  }
-  
-  colnames(reporting_df)[4] <- "Agency_Type"
+  reporting_df[, 4] <- read_var(fbi_reporting, "Agency_Type", 66, 66)
   
   for(i in seq_along(fbi_reporting)){
     ifelse(reporting_df[i, 4] == "0", reporting_df[i, 4] <- "CoveredbyOther", 
@@ -87,57 +91,30 @@ fbi_import_reporting <- function (full_fbi){
   }
   
   #Core_City Variable
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 5] <- substr(fbi_reporting[i], 67, 67)
-  }
-  
-  colnames(reporting_df)[5] <- "Metro_Area"
+  reporting_df[, 5] <- read_var(fbi_reporting, "Metro_Area", 67, 67)
   
   for(i in seq_along(fbi_reporting)){
-    ifelse(reporting_df[i, 5] == "N", reporting_df[i, 5] <- "0", reporting_df[i, 5] <- "1")
+    ifelse(reporting_df[i, 5] == "N", reporting_df[i, 5] <- 0, reporting_df[i, 5] <- 1)
   }
   
   #Date ORI was added var
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 6] <- substr(fbi_reporting[i], 14, 21)
-  }
-  
-  colnames(reporting_df)[6] <- "Date_Added"
+  reporting_df[, 6] <- read_var(fbi_reporting, "Date_Added", 14, 21)
   
   reporting_df[, 6] <- ymd(reporting_df[, 6])
   
-  #Date ORI went NIBRS (????)
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 7] <- substr(fbi_reporting[i], 22, 29)
-  }
-  
-  colnames(reporting_df)[7] <- "Date_NIBRS"
+  #Date ORI went NIBRS
+  reporting_df[, 7] <- read_var(fbi_reporting, "Date_NIBRS", 22, 29)
   
   reporting_df[, 7] <- ymd(reporting_df[, 7])
   
-  # 30 59
-  
   #City Name
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 8] <- substr(fbi_reporting[i], 30, 59)
-    #Find a way to remove spaces
-  }
-  
-  colnames(reporting_df)[8] <- "City_Name"
+  reporting_df[, 8] <- read_var(fbi_reporting, "City_Name", 30, 59)
   
   #Pop_Group Codes variable
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 9] <- substr(fbi_reporting[i], 62, 63)
-  }
-  
-  colnames(reporting_df)[9] <- "Pop_Group_Code"
+  reporting_df[, 9] <- read_var(fbi_reporting, "Pop_Group_Code", 62, 63)
   
   #Judicial District Code
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 9] <- substr(fbi_reporting[i], 81, 84)
-  }
-  
-  colnames(reporting_df)[9] <- "Judicial_Dist_in_State"
+  reporting_df[, 10] <- read_var(fbi_reporting, "Judicial_Dist_in_State", 81, 84)
   
   #Is Nibrs Active?
   for(i in seq_along(fbi_reporting)){
@@ -147,55 +124,26 @@ fbi_import_reporting <- function (full_fbi){
   colnames(reporting_df)[10] <- "IsActiveNIBRS"
   
   #Current population covered
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 11] <- as.integer(substr(fbi_reporting[i], 94, 100))
-  }
+  reporting_df[, 11] <- read_var(fbi_reporting, "Current_Pop", 94, 100)
+
   
-  colnames(reporting_df)[11] <- "Current_Pop"
-  #Find out what this means
-  
-  #103 105
   #FIPS County Code
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 12] <- substr(fbi_reporting[i], 256, 270)
-  }
-  
-  colnames(reporting_df)[12] <- "FIPS_Code"
+  reporting_df[, 12] <- read_var(fbi_reporting, "FIPS_Code", 256, 270)
   
   #UCR County Code
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 13] <- substr(fbi_reporting[i], 103, 105)
-  }
-  
-  colnames(reporting_df)[13] <- "UCR_Code"
+  reporting_df[, 13] <- read_var(fbi_reporting, "UCR_Code", 103, 105)
   
   #MSA Code
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 14] <- substr(fbi_reporting[i], 106, 108)
-  }
-  
-  colnames(reporting_df)[14] <- "MSA_Code"
+  reporting_df[, 14] <- read_var(fbi_reporting, "MSA_Code", 106, 108)
   
   #Last Population
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 15] <- as.integer(substr(fbi_reporting[i], 109, 117))
-  }
-  
-  colnames(reporting_df)[15] <- "Last_Population"
+  reporting_df[, 15] <- read_var(fbi_reporting, "Last_Population", 109, 117)
   
   #Master File Year
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 16] <- substr(fbi_reporting[i], 214, 217)
-  }
-  
-  colnames(reporting_df)[16] <- "Master_File_Year"
+  reporting_df[, 16] <- read_var(fbi_reporting, "Master_File_Year", 214, 217)
   
   #Agency ID
-  for(i in seq_along(fbi_reporting)){
-    reporting_df[i, 17] <- substr(fbi_reporting[i], 5, 13)
-  }
-  
-  colnames(reporting_df)[17] <- "Agency_ID"
+  reporting_df[, 17] <- read_var(fbi_reporting, "Agency_ID", 5, 13)
   
   #Quarters of Activity
   for(i in seq_along(fbi_reporting)){
@@ -216,15 +164,21 @@ fbi_import_reporting <- function (full_fbi){
   
   reporting_df <- reporting_df %>%
     gather(key = Quarter, value = Incidents, 18, 19, 20, 21)
-  
-  
-  return(reporting_df)
-}  
+
+
+
+
 
 #Next section is on the fbi incidents reported.
 fbi_import_incidents <- function(full_fbi){  
   
+  fbi_incidents <- vector()
+ 
   incidents_df <- data.frame()
+  
+  for(i in seq_along(fbi_incidents)){
+    incidents_df[i, 1] <- i
+  }
   
   #State Code
   for(i in seq_along(fbi_incidents)){
