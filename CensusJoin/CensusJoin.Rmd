@@ -24,31 +24,40 @@ library(tidyr)
 
 Import and tidy SocialExplorer data
 
+
 ```{r, Al to CO}
-#RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/ALtoCO2.xlsx", skip = 1, sheet = "Sheet1")
+#RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/CAtoCO.xlsx", skip = 1, sheet = "Sheet1")
+
+RelALtoCO <- read_csv("/Users/emilyclark/Desktop/Junior/States/CAtoCO.csv",
+                      skip = 1)
 
 
-#Chester fixes 1-3 problem
 
-#for(i in seq(from = 2, to = 205, by = 3)){
-  #names(RelALtoCO)[i + 1] <- names(RelALtoCO)[i]
-  #names(RelALtoCO)[i + 2] <- names(RelALtoCO)[i]
-#}
+```
 
-#names(RelALtoCO) <- make.names(names(RelALtoCO), unique = TRUE)
+```{r, Al to CO}
+RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelALtoCO.xlsx", skip = 1, sheet = "Sheet1")
 
-#RelALtoCO <- RelALtoCO %>% 
-  #slice(c(3, 20))
-#transpose
 
-#RelALtoCO <- t(RelALtoCO) %>%
-   #data.frame() %>% 
-  #rownames_to_column(var = "county") %>%
-  #slice(-1) %>% 
-  #rename(relig = X1, muslim = X2) %>%
-  #spread(key = relig, value= muslim) %>%
-  #mutate(county = str_replace_all(county, ".1", "")) %>% 
-  #mutate(county = str_replace_all(county, ".2", ""))
+for(i in seq(from = 2, to = 205, by = 3)){
+  names(RelALtoCO)[i + 1] <- names(RelALtoCO)[i]
+  names(RelALtoCO)[i + 2] <- names(RelALtoCO)[i]
+}
+
+names(RelALtoCO) <- make.names(names(RelALtoCO), unique = TRUE)
+
+RelALtoCO <- RelALtoCO %>% 
+  slice(c(3, 20))
+transpose
+
+RelALtoCO <- t(RelALtoCO) %>%
+  data.frame() %>% 
+  rownames_to_column(var = "county") %>%
+  slice(-1) %>% 
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(county = str_replace_all(county, ".1", "")) %>% 
+  mutate(county = str_replace_all(county, ".2", ""))
   
 
 
@@ -83,7 +92,7 @@ RelCNtoILL <- t(RelCNtoILL) %>%
 ```{r, Indiana to Minnesota}
 RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
 
-for(i in seq(from = 2, to = 2063, by = 3)){
+for(i in seq(from = 2, to = 2064, by = 3)){
   names(RelINtoMI)[i + 1] <- names(RelINtoMI)[i]
   names(RelINtoMI)[i + 2] <- names(RelINtoMI)[i]
 }
@@ -153,46 +162,76 @@ RelWVtoWY <- t(RelWVtoWY) %>%
 
 ```
 
+```{r, Al to CO}
+RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/CAtoCO.xlsx", skip = 1, sheet = "Sheet1")
+
+
+
+```
 
 ```{r, bind}
 
-bind_states <- rbind(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY)
+bind_states <- bind_rows(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY)
+
+bind_states_sel <- bind_states %>% 
+  mutate(Adherents = as.numeric(Adherents)) %>% 
+  mutate(Congregations = as.numeric(Congregations)) %>% 
+  mutate(Adherents = ifelse(is.na(Adherents), 0, Adherents)) %>% 
+  mutate(Congregations = ifelse(is.na(Congregations), 0, Congregations))
+
+bind_states_summ <- bind_states_sel %>% 
+  group_by(county) %>% 
+  summarize(Adherents = sum(Adherents),
+            Congregations = sum(Congregations))
+  
+bind_state_summ2 <- bind_states_summ %>% #replace(county, "Parish", "County")
+  mutate(county = str_replace_all(county, "Parish", "County")) %>%
+# Also do for borough
+  separate(county, into=c("county", "state"), sep = ".County..") %>% 
+  mutate(county = str_replace_all(county, "\\.", " ")) %>%
+  mutate(state = str_replace_all(state, "\\.", " "))
 
 
 ```
 
-
-Import FIPS. Unite 
+Load data
 
 ```{r}
-
-#FIPS <- read_excel("/Users/emilyclark/Desktop/Junior/States/US_FIPS_Codes.xls", col_names = FALSE) 
-
-
-#FIPSAl <- FIPS %>% filter(X1 == "Alabama") %>%
-   #rename(state = X1, county = X2, StateFIPS = X3, CountyFIPS = X4) %>%
-   #select(-`state`) %>%
-   #unite(FIPS, StateFIPS, CountyFIPS, sep = "")
+crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/CrimeData.csv")
+education <-read_csv("/Users/emilyclark/Desktop/Junior/States/real_education.csv")
+population <- read_csv("/Users/emilyclark/Desktop/Junior/States/real_pop.csv")
+income <- read_csv("/Users/emilyclark/Desktop/Junior/States/Income.csv")
+FIPS <- read_csv("/Users/emilyclark/Desktop/Junior/States/FIPS.csv",
+                 skip = 1)
 
 ```
 
-Import total population
 ```{r}
-#totalpop <- read_excel("/Users/emilyclark/Desktop/Junior/States/PopAlabama.xls", skip = 1, sheet = "Sheet1")
-
-#totalpop_long <- t(totalpop) %>%
-  #data.frame() %>% 
-  #rownames_to_column(var = "county") %>%
-  #rename(TotalPop = X3, PopDensity = X4, Area = X5) %>%
-  #select(`county`, `TotalPop`, `PopDensity`, `Area`) %>%
-  #mutate(county = str_replace_all(county, " County, Alabama", ""))
+crime <- crime %>% select(Geo_FIPS, Geo_QName, SE_T003_001)
+education <- education %>% select(Geo_FIPS, Geo_QName, SE_T025_001)
+population <- population %>% select(Geo_FIPS, Geo_QName, SE_T002_001, SE_T002_002)
+income <- income %>% select(Geo_FIPS, Geo_QName, SE_T057_001)
 
 
 ```
+
 
 Join
 ```{r}
-relFIPS <- RelAlabama %>% left_join(FIPSAl, by="county")
-#relFIPSpop <- relFIPS %>% left_join(totalpop_long, by = "county")
+joined1 <- left_join(x = bind_state_summ2, y = FIPS, 
+                     by = c("county" = "County Name" , "state" = "State"))
+
+crime2 <- crime %>%
+  mutate(Geo_FIPS = as.character(Geo_FIPS)) %>% 
+  mutate(Geo_FIPS2 = ifelse(nchar(Geo_FIPS) == 4,
+                           paste0("0", Geo_FIPS),
+                           Geo_FIPS))
+library(magrittr)
+# Same as crime2 <- crime2 %>%
+crime2 %<>% separate(Geo_FIPS2, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
+
+joined2 <- left_join(x = joined1, y = crime2, 
+                     by = c("FIPS State" , "FIPS County"))
 
 ```
+
