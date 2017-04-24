@@ -26,20 +26,11 @@ Import and tidy SocialExplorer data
 
 
 ```{r, Al to CO}
-#RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/CAtoCO.xlsx", skip = 1, sheet = "Sheet1")
 
-RelALtoCO <- read_csv("/Users/emilyclark/Desktop/Junior/States/CAtoCO.csv",
+RelALtoCO <- read_csv("/Users/emilyclark/Desktop/Junior/States/AltoCO.csv",
                       skip = 1)
 
-
-
-```
-
-```{r, Al to CO}
-RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/RelALtoCO.xlsx", skip = 1, sheet = "Sheet1")
-
-
-for(i in seq(from = 2, to = 205, by = 3)){
+for(i in seq(from = 2, to = 939, by = 3)){
   names(RelALtoCO)[i + 1] <- names(RelALtoCO)[i]
   names(RelALtoCO)[i + 2] <- names(RelALtoCO)[i]
 }
@@ -92,7 +83,7 @@ RelCNtoILL <- t(RelCNtoILL) %>%
 ```{r, Indiana to Minnesota}
 RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
 
-for(i in seq(from = 2, to = 2064, by = 3)){
+for(i in seq(from = 2, to = 2063, by = 3)){
   names(RelINtoMI)[i + 1] <- names(RelINtoMI)[i]
   names(RelINtoMI)[i + 2] <- names(RelINtoMI)[i]
 }
@@ -162,16 +153,11 @@ RelWVtoWY <- t(RelWVtoWY) %>%
 
 ```
 
-```{r, Al to CO}
-RelALtoCO <- read_excel("/Users/emilyclark/Desktop/Junior/States/CAtoCO.xlsx", skip = 1, sheet = "Sheet1")
 
-
-
-```
 
 ```{r, bind}
 
-bind_states <- bind_rows(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY)
+bind_states <- bind_rows(RelCNtoILL, RelINtoMI, RelMISStoWA, RelWVtoWY, RelALtoCO)
 
 bind_states_sel <- bind_states %>% 
   mutate(Adherents = as.numeric(Adherents)) %>% 
@@ -186,7 +172,8 @@ bind_states_summ <- bind_states_sel %>%
   
 bind_state_summ2 <- bind_states_summ %>% #replace(county, "Parish", "County")
   mutate(county = str_replace_all(county, "Parish", "County")) %>%
-# Also do for borough
+  mutate(county = str_replace_all(county, "Borough", "County")) %>%
+  mutate(county = str_replace_all(county, "Census Area", "County")) %>%
   separate(county, into=c("county", "state"), sep = ".County..") %>% 
   mutate(county = str_replace_all(county, "\\.", " ")) %>%
   mutate(state = str_replace_all(state, "\\.", " "))
@@ -216,7 +203,7 @@ income <- income %>% select(Geo_FIPS, Geo_QName, SE_T057_001)
 ```
 
 
-Join
+
 ```{r}
 joined1 <- left_join(x = bind_state_summ2, y = FIPS, 
                      by = c("county" = "County Name" , "state" = "State"))
@@ -226,12 +213,47 @@ crime2 <- crime %>%
   mutate(Geo_FIPS2 = ifelse(nchar(Geo_FIPS) == 4,
                            paste0("0", Geo_FIPS),
                            Geo_FIPS))
-library(magrittr)
-# Same as crime2 <- crime2 %>%
-crime2 %<>% separate(Geo_FIPS2, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
 
-joined2 <- left_join(x = joined1, y = crime2, 
-                     by = c("FIPS State" , "FIPS County"))
+crime2 <- crime2 %>% separate(Geo_FIPS2, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
+education2 <- education %>% separate(Geo_FIPS, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
+population2 <- population %>% separate(Geo_FIPS, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
+income2 <- income %>% separate(Geo_FIPS, into=c("FIPS State", "FIPS County"), sep = 2, remove = TRUE)
+
+
+
 
 ```
 
+```{r, join}
+joined2 <- left_join(x = joined1, y = crime2, 
+                     by = c("FIPS State" , "FIPS County"))
+joined2 <- left_join(x = joined2, y = education2, 
+                     by = c("FIPS State" , "FIPS County"))
+
+
+joined2 <- left_join(x = joined2, y = population2, 
+                     by = c("FIPS State" , "FIPS County"))
+joined5 <- left_join(x = joined4, y = income2, 
+                     by = c("FIPS State" , "FIPS County"))
+
+
+```
+
+
+```{r, select}
+
+finalSelect <- joined5 %>% select(county, state, Adherents, Congregations, `FIPS State`, `FIPS County`, Geo_FIPS, SE_T003_001, SE_T025_001, SE_T025_002)
+
+withPop <- left_join(x = finalSelect, y = population2, 
+                     by = c("FIPS State" , "FIPS County"))
+withPopselect <-withPop %>% select(county, state, Adherents, Congregations, `FIPS State`, `FIPS County`, Geo_FIPS, SE_T003_001, SE_T025_001, SE_T025_002, SE_T002_001, SE_T002_002)
+
+withincome <- left_join(x = withPopselect, y = income2, 
+                     by = c("FIPS State" , "FIPS County"))
+withincomeselect <- select <-withincome %>% select(county, state, Adherents, Congregations, `FIPS State`, `FIPS County`, Geo_FIPS, SE_T003_001, SE_T025_001, SE_T025_002, SE_T002_001, SE_T002_002, SE_T057_001)
+```
+
+```{r, rename}
+
+Neater <- withincomeselect %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs = SE_T025_002, NumViolentCrime = SE_T003_001, TotalPop = SE_T002_001, PopDens = SE_T002_002, MedIncome = SE_T057_001 ) 
+```
