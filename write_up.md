@@ -33,10 +33,13 @@ Crime incidence data is available from the FBI’s Uniform Crime Reporting Progr
 Hypothesis and Methodology  
 -------------------------
 
-In order to bridge the gap between existing theoretical literature on anti-Muslim hate crimes (Poynting and Perry 2007; Frost 2008) and empirical observations, we test the following hypothesis:
-H1. Higher levels of anti-Muslim rhetoric in national mainstream media will increase the incidence of religiously-motivated anti-Muslim hate crimes.  
+In order to bridge the gap between existing theoretical literature on anti-Muslim hate crimes (Poynting and Perry 2007; Frost 2008) and empirical observations, we test the following hypothesis:  
 
-This research estimates a regression model to analyze the impact of Islamophobic rhetoric in mainstream national media. We use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack.  
+*H1. The incidence of religiously-motivated anti-Muslim hate crimes will increase with higher levels of anti-Muslim rhetoric in national mainstream media.*  
+
+*Null H1: The incidence of religiously-motivated anti-Muslim hate crimes will not increase with higher levels of anti-Muslim rhetoric in national mainstream media.*  
+
+This research estimates a regression model to analyze the impact of Islamophobic rhetoric in mainstream national media. We use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack.   
 
 
 Mini literature review
