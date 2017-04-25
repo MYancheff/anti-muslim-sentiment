@@ -1,4 +1,4 @@
-Media and Hate Crimes: Analyzing the Effect of Anti-Muslim Rhetoric in National Media on Anti-Muslim Hate Crimes  
+Media and Hate Crimes: Analyzing the Effect of Islamophobia in National Media on Anti-Muslim Hate Crimes  
 ================
 Emily Clark, Theodore Dounias, Kristina Kutateli
 
@@ -7,7 +7,7 @@ Abstract
 
 Does anti-Muslim and Islamophobic rhetoric in mainstream media affect the incidence of religiously motivated anti-Muslim hate crimes? Using annual data from ReThink Media on the daily rate of Islamophobia in mainstream national news from 2011 to 2013, we analyze whether higher rates of anti-Muslim rhetoric correlate with more frequent incidences of anti-Muslim hate crimes as recorded by the FBI. While others have found statistical evidence of increased hate crime incidence following terrorist attacks, none have provided an empirical exploration of the effect of mainstream media rhetoric. If events are correlated with increased hate crime rates, how mainstream news sources cover those events may have serious implications for hate crime incidence. Controlling for county Muslim population, average level of education, median income, and base crime rate using Census data from TK year, we find that TK TK. Findings confirm TK. These results provide some of the first quantitative evidence that TK.   
 
-Existing literature review  
+Existing literature 
 ----------------------
 
 The majority of the existing literature on specifically anti-Muslim hate crimes lacks empirical exploration of potential causes. King and Sutton (2013) provide one of the few studies of religiously motivated hate crimes that utilize statistical modelling. Hypothesizing that many hate crimes are retaliatory in nature and tend to increase dramatically in the aftermath of an event, they find that contentious trial verdicts and lethal terrorist attacks “precede spikes in racially or religiously motivated hate crimes.” Kaplan (2006) provided a clear-cut example of the effects of external threats on hate crime. Using FBI statistics, he showed a sharp spike in Islamophobic hate crime in the US immediately following the terrorist attacks in September 2001. Green et al. (1998) found correlations between demographic change (mainly rate of influx of ethnic minorities to predominantly white neighbourhoods) and hate crime incidents.   
