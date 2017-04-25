@@ -22,7 +22,7 @@ The official reports filed with the FBI are regarded as the “best source of na
 
 To provide a measurement for the rate of anti-Muslim rhetoric in the media, we utilize ReThink Media's collected data on the level of Islamophobia in national, mainstream media (FOX news, New York Times, etc.). ReThink developed a search string that captures relevant news stories, pulling in news articles from a set list of national news outlets daily. Highlighting each quotation in each news article, ReThink then coded for the source (speaker), the message, and the sentiment of each quotation. Quotations coded as “Islamophobia” can range from problematic attitudes towards Muslims (e.g., Muslim communities must be partners to law enforcement in the war on terrorism) to outright bigotry (e.g., not all Muslims are terrorists but most terrorists are Muslim). We utilize media data from 2011 to 2013.  
 
-	*Controls*  
+*Controls*  
 	
 	The population of Muslims in a given county might affect the incidence of hate crimes. In order to control for the population of Muslims in a county, we utilize Census data from TK year. While Census data provides this information for certain counties, the information is voluntarily reported and lacks data for some counties. We also use Census data to control for average level of education and median income. We include the average level of education and median income as a control for economic conditions because although the literature is mixed, some research finds a relationship between economic downturns and hate crimes (Beck and Tolnay 1990, Soule 1992).   
 	
