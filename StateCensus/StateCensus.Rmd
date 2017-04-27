@@ -1,0 +1,98 @@
+---
+title: "StateLevel"
+output: html_document
+---
+
+
+```{r pressure, echo=FALSE}
+library(tidyverse)
+library(magrittr)
+library(readxl)
+library(xlsx)
+library(datasets)
+library(dplyr)
+library(magrittr)
+library(markdown)
+library(methods)
+library(readr)
+library(readxl)
+library(stringr)
+library(tibble)
+library(tidyr)
+
+```
+
+```{r, import State Data}
+
+RelState<- read_excel("/Users/emilyclark/Desktop/Junior/States/Rel_State.xlsx", skip = 1, sheet = "Sheet1") %>%
+
+for(i in seq(from = 2, to =  157, by = 3)){
+  names(RelState)[i + 1] <- names(RelState)[i]
+  names(RelState)[i + 2] <- names(RelState)[i]
+}
+
+names(RelState) <- make.names(names(RelState), unique = TRUE)
+```
+
+ReliState <- ReliState %>% 
+  slice(c(3, 20))
+
+ReliState <- t(ReliState) %>%
+   data.frame() %>%
+    rownames_to_column(var = "State") %>%
+  slice(-1) %>%
+  rename(relig = X1, muslim = X2) %>%
+  spread(key = relig, value= muslim) %>%
+  mutate(ReliState = as.character(ReliState))
+  mutate(State = str_replace_all(State, ".1", "")) %>% 
+  mutate(State = str_replace_all(State, ".2", ""))
+
+
+```
+
+
+Get rid of duplicates...problem with the factor!
+
+```{r}
+
+ReliState2 <- ReliState %>% 
+  mutate(ReliState = as.character(ReliState))
+  mutate(Adherents = as.numeric(Adherents)) %>% 
+  mutate(Congregations = as.numeric(Congregations)) %>% 
+  mutate(Adherents = ifelse(is.na(Adherents), 0, Adherents)) %>% 
+  mutate(Congregations = ifelse(is.na(Congregations), 0, Congregations)) %>%
+  group_by(State) %>% 
+  summarize(Adherents = sum(Adherents),
+            Congregations = sum(Congregations))
+
+
+```
+
+
+```{r, load data}
+State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv")
+ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv")
+
+```
+
+
+```{r, join}
+
+RelACS <- left_join(x = ReliState2, y = ACS, 
+                     by = c("State" = "Geo_NAME"))
+Reltotal <- left_join(x = RelACS, y = State_crime,
+                      by = c("State"= "Geo_Name"))
+                     
+```                    
+
+
+```{r, select}
+
+StateCensus <- Reltotal %>% select(State, Adherents, Congregations, Geo_FIPS.x, SE_T025_001, SE_T025_002, SE_T004_001, SE_T002_001, SE_T002_002,  SE_T057_001 )
+
+StateCensus <- StateCensus %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs = SE_T025_002, NumViolentCrime = SE_T004_001, TotalPop = SE_T002_001, PopDens = SE_T002_002, MedIncome = SE_T057_001 )
+
+```
+
+
+```
