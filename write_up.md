@@ -31,7 +31,7 @@ To provide a measurement for the rate of anti-Muslim rhetoric in the media, we u
 
 *Controls*  
 	
-The population of Muslims in a given county might affect the incidence of hate crimes. In order to control for the population of Muslims in a county, we utilize Census data from TK year. While Census data provides this information for certain counties, the information is voluntarily reported and lacks data for some counties. We also use Census data to control for average level of education and median income. We include the average level of education and median income as a control for economic conditions because although the literature is mixed, some research finds a relationship between economic downturns and hate crimes (Beck and Tolnay 1990, Soule 1992).   
+The population of Muslims in a given county might affect the incidence of hate crimes. In order to control for the population of Muslims in a county, we utilize Census data from 2010-2015 (see Appendix A for complete list of data source). While Census data provides this information for certain counties, the information is voluntarily reported and lacks data for some counties. We also use Census data to control for average level of education and median income. We include the average level of education and median income as a control for economic conditions because although the literature is mixed, some research finds a relationship between economic downturns and hate crimes (Beck and Tolnay 1990, Soule 1992).   
 	
 Crime incidence data is available from the FBI’s Uniform Crime Reporting Program and cover both violent crime and property crime, as well as reported hate crimes based on race/ethnicity, disability status, and sexuality. To the extent that reported hate crime fluctuations are due to general crime trends, the general crime measures should capture that. If, on the other hand, any relationships between anti-Muslim rhetoric and anti-Muslim hate crimes are spurious and capturing broad social trends in hate crimes, our other hate crime measures should capture that.  
 
@@ -47,4 +47,20 @@ In order to bridge the gap between existing theoretical literature on anti-Musli
 *Null H1: The incidence of religiously-motivated anti-Muslim hate crimes will not increase with higher levels of anti-Muslim rhetoric in national mainstream media.*  
 
 This research estimates a regression model to analyze the impact of Islamophobic rhetoric in mainstream national media. We use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack.   
+
+Appendix
+  A. Census Data Source
+    1)	American Community Survey (ACS) 2011-2015 (5-Year Estimates)
+      a)	Population Data
+        i)	Total Population: SE_T002_001 
+        ii)	Population Density: SE_T002_002
+      b)	Median Income
+        i)	Median Household Income (In 2015 Inflation Adjusted Dollars): SE_T057_00
+    2)	UCR Crime Data 2010
+      a)	Violent Crime
+        i)	Number of Total Violent Crimes: SE_T004_001
+    3)	US Religion Data (RCMS) 2010
+      a)	Number of Muslim Adherents per State
+      b)	Number of Muslim Congregations per State
+
 
