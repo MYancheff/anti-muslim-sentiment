@@ -24,26 +24,27 @@ library(tidyr)
 
 ```{r, import State Data}
 
-RelState<- read_excel("/Users/emilyclark/Desktop/Junior/States/Rel_State.xlsx", skip = 1, sheet = "Sheet1") %>%
+RelState<- read_excel("/Users/emilyclark/Desktop/Junior/States/Rel_State.xlsx", skip = 1, sheet = "Sheet1")
 
-for(i in seq(from = 2, to =  157, by = 3)){
+for(i in seq(from = 2, to =  152, by = 3)){
   names(RelState)[i + 1] <- names(RelState)[i]
   names(RelState)[i + 2] <- names(RelState)[i]
 }
 
 names(RelState) <- make.names(names(RelState), unique = TRUE)
-```
 
-ReliState <- ReliState %>% 
+
+RelState <- RelState %>% 
   slice(c(3, 20))
 
-ReliState <- t(ReliState) %>%
+RelState <- t(RelState) %>%
    data.frame() %>%
     rownames_to_column(var = "State") %>%
   slice(-1) %>%
   rename(relig = X1, muslim = X2) %>%
   spread(key = relig, value= muslim) %>%
-  mutate(ReliState = as.character(ReliState))
+  mutate(Adherents = as.character(Adherents),
+         Congregations = as.character(Congregations)) %>%
   mutate(State = str_replace_all(State, ".1", "")) %>% 
   mutate(State = str_replace_all(State, ".2", ""))
 
@@ -55,8 +56,7 @@ Get rid of duplicates...problem with the factor!
 
 ```{r}
 
-ReliState2 <- ReliState %>% 
-  mutate(ReliState = as.character(ReliState))
+ReliState2 <- RelState %>% 
   mutate(Adherents = as.numeric(Adherents)) %>% 
   mutate(Congregations = as.numeric(Congregations)) %>% 
   mutate(Adherents = ifelse(is.na(Adherents), 0, Adherents)) %>% 
@@ -70,8 +70,8 @@ ReliState2 <- ReliState %>%
 
 
 ```{r, load data}
-State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv")
-ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv")
+State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv") %>% mutate(Geo_Name = str_replace_all(Geo_Name, " ", "."))
+ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv") %>% mutate(Geo_NAME = str_replace_all(Geo_NAME, " ", "."))
 
 ```
 
@@ -94,5 +94,8 @@ StateCensus <- StateCensus %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs =
 
 ```
 
+
+```{r}
+write_csv(StateCensus, "StateCensus.csv")
 
 ```
