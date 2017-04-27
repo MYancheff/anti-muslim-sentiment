@@ -81,6 +81,7 @@ RelCNtoILL <- t(RelCNtoILL) %>%
 ```
 
 ```{r, Indiana to Minnesota}
+
 RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to = 2063, by = 3)){
@@ -256,4 +257,9 @@ withincomeselect <- select <-withincome %>% select(county, state, Adherents, Con
 ```{r, rename}
 
 Neater <- withincomeselect %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs = SE_T025_002, NumViolentCrime = SE_T003_001, TotalPop = SE_T002_001, PopDens = SE_T002_002, MedIncome = SE_T057_001 ) 
+```
+
+```{r}
+write_csv(Neater, "Census.csv")
+
 ```
