@@ -17,15 +17,16 @@ FIPS_codes <- FIPS_codes %>%
   summarize() %>%
   rename(State_ID = State.Abbreviation)
 
+#Make character state codes
 FIPS_codes$State_ID <- as.character(FIPS_codes$State_ID)
 
-
+#Handle census data to remove useless rows
 census_df <- census_df %>%
   slice(-46) %>%
   slice(-28) %>%
   slice(-9) 
 
-
+#Handle hate crime data
 hate_crime_df <- incidents_df %>%
   mutate(count = 1, Year = year(Incident_Date), State_ID = substr(Agency_ID, 1, 2)) %>%
   group_by(State_Code, State_ID, Year) %>%
@@ -34,5 +35,14 @@ hate_crime_df <- incidents_df %>%
 
 hate_crime_df <- inner_join(hate_crime_df, FIPS_codes, "State_ID")
 
+hate_crime_df <- rename(hate_crime_df, Geo_FIPS.x = State.FIPS.Code)
 
-?inner_join()
+hate_crime_df_2011 <- hate_crime_df %>%
+  filter(Year == 2011)
+
+census_df$Geo_FIPS.x <- as.character(census_df$Geo_FIPS.x)
+
+modelling_full_2011 <- inner_join(hate_crime_df_2011, census_df, by = "Geo_FIPS.x")
+
+
+
