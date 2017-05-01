@@ -48,19 +48,19 @@ In order to bridge the gap between existing theoretical literature on anti-Musli
 
 This research estimates a regression model to analyze the impact of Islamophobic rhetoric in mainstream national media. We use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack.   
 
-Appendix
-  A. Census Data Source
-    1)	American Community Survey (ACS) 2011-2015 (5-Year Estimates)
-      a)	Population Data
-        i)	Total Population: SE_T002_001 
-        ii)	Population Density: SE_T002_002
-      b)	Median Income
-        i)	Median Household Income (In 2015 Inflation Adjusted Dollars): SE_T057_00
-    2)	UCR Crime Data 2010
-      a)	Violent Crime
-        i)	Number of Total Violent Crimes: SE_T004_001
-    3)	US Religion Data (RCMS) 2010
-      a)	Number of Muslim Adherents per State
-      b)	Number of Muslim Congregations per State
+Appendix   
+  A. Census Data Source    
+    1)	American Community Survey (ACS) 2011-2015 (5-Year Estimates)   
+      a)	Population Data   
+        i)	Total Population: SE_T002_001    
+        ii)	Population Density: SE_T002_002   
+      b)	Median Income   
+        i)	Median Household Income (In 2015 Inflation  Adjusted Dollars): SE_T057_00    
+    2)	UCR Crime Data 2010  
+      a)	Violent Crime  
+        i)	Number of Total Violent Crimes: SE_T004_001  
+    3)	US Religion Data (RCMS) 2010  
+      a)	Number of Muslim Adherents per State  
+      b)	Number of Muslim Congregations per State  
 
 
