@@ -39,3 +39,15 @@ new_joined[is.na(new_joined)] <- 0
 
 joined_data <- select(new_joined, newdate, Islamophobia, Anti_Muslim)
 
+joined_data$Anti_Muslim <- as.integer(joined_data$Anti_Muslim)
+
+ddply(joined_data,"Anti_Muslim",numcolwise(sum))
+
+new_joined_data <- aggregate(Anti_Muslim~newdate,data=joined_data,FUN=sum) 
+
+joined <- rethink %>% left_join(new_joined_data, by = c("newdate" = "newdate"))
+
+new_join <- joined %>% mutate(Year = year(ymd(newdate)))
+new_join <- filter(new_join, Year == "2011" | Year == "2012" | Year == "2013")
+
+ggplot(data = new_join, aes(x=newdate, y=Islamophobia)) + geom_density()
