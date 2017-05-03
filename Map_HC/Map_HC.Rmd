@@ -1,0 +1,39 @@
+---
+title: "MapPrep"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r pressure, echo=FALSE}
+library(tidyverse)
+library(magrittr)
+library(readxl)
+library(xlsx)
+library(datasets)
+library(dplyr)
+library(magrittr)
+library(markdown)
+library(methods)
+library(readr)
+library(readxl)
+library(stringr)
+library(tibble)
+library(tidyr)
+
+```
+
+```{r, import State Data}
+
+Map_HC<- read_csv("/Users/emilyclark/Desktop/Junior/Math_241/anti-muslim-sentiment/map_HC_stats.csv")
+
+```
+
+```{r}
+
+Map_spread <- Map_HC  %>% spread(key = "Year", value = "Year") 
+
+
+```

@@ -70,8 +70,8 @@ ReliState2 <- RelState %>%
 
 
 ```{r, load data}
-State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv") %>% mutate(Geo_Name = str_replace_all(Geo_Name, " ", "."))
-ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv") %>% mutate(Geo_NAME = str_replace_all(Geo_NAME, " ", "."))
+State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv") %>% mutate(Geo_Name = str_replace_all(Geo_Name, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
+ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv") %>% mutate(Geo_NAME = str_replace_all(Geo_NAME, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
 
 ```
 
@@ -94,8 +94,15 @@ StateCensus <- StateCensus %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs =
 
 ```
 
+```{r}
+StateCensus <- data.frame(StateCensus, "EducationRatePer100000" = (1 - StateCensus$LessThanHS25yrs/StateCensus$PopOver25)/100000)
+StateCensus <- data.frame(StateCensus, "ViolenceRatePer100000" = ( StateCensus$NumViolentCrime/StateCensus$TotalPop)/100000)
+StateCensus <- data.frame(StateCensus, "MuslimPopPer100000" = ( StateCensus$Adherents/StateCensus$TotalPop)/100000)
+
+
+```
 
 ```{r}
-write_csv(StateCensus, "StateCensus.csv")
+write_csv(StateCensus, "StateCensusTIDY.csv")
 
 ```
