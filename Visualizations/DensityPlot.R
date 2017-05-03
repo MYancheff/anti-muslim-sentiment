@@ -33,6 +33,8 @@ new_joined <- filter(new_joined, Year == "2011" | Year == "2012" | Year == "2013
 
 new_joined$Anti_Muslim <- as.character(new_joined$Anti_Muslim)
 
+
+
 new_joined$Anti_Muslim[new_joined$Anti_Muslim == "Y"] <- "1"
 
 new_joined[is.na(new_joined)] <- 0
@@ -51,3 +53,21 @@ new_join <- joined %>% mutate(Year = year(ymd(newdate)))
 new_join <- filter(new_join, Year == "2011" | Year == "2012" | Year == "2013")
 
 ggplot(data = new_join, aes(x=newdate, y=Islamophobia)) + geom_density()
+
+new_new_join <- gather(new_join, key = type, value = count, Islamophobia, Anti_Muslim)
+
+
+fuck <- new_new_join %>% mutate(week = (year(newdate) - year(min(newdate)))*52 + 
+                 week(newdate) - week(min(newdate)),
+               week2 = (as.numeric(newdate) %/% 7) - (as.numeric(min(newdate)) %/% 7)) %>%
+  arrange(newdate)
+
+
+ggplot(data = join_2011, aes(x=week, y=count, col=type), group=type) + geom_line() + scale_y_log10() 
+ggplot(data = join_2011, aes(x=week, y=count, fill=type), group=type) + geom_bar(stat = "identity")
+ggplot(data = join_2011, aes(x=week, y=count, col=type), group=type) + geom_density(stat = "identity") + scale_y_log10() 
+
+
+join_2011 <- filter(fuck, Year == "2011")
+join_2012 <- filter(fuck, Year == "2012")
+join_2013 <- filter(fuck, Year == "2013")
