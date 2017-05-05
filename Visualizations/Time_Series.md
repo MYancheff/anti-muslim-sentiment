@@ -197,10 +197,38 @@ ggplot(data = join_2013, aes(x=week, y=count, col=type)) + geom_line()
 
 ``` r
 join_2011$type <- as.factor(join_2011$type)
-
 join_2011$type = factor(join_2011$type,levels(join_2011$type)[c(2,1)])
+
+join_2012$type <- as.factor(join_2012$type)
+join_2012$type = factor(join_2012$type,levels(join_2012$type)[c(2,1)])
+
+join_2013$type <- as.factor(join_2013$type)
+join_2013$type = factor(join_2013$type,levels(join_2013$type)[c(2,1)])
 
 ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
 ```
 
 <img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-1.png" width="1000px" />
+
+``` r
+ggplot(data = join_2012, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+```
+
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-2.png" width="1000px" />
+
+``` r
+ggplot(data = join_2013, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+```
+
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-3.png" width="1000px" />
+
+### By WEEK for all THREE YEARS
+
+``` r
+weeks$type <- as.factor(weeks$type)
+weeks$type = factor(weeks$type,levels(weeks$type)[c(2,1)])
+
+ggplot(data = weeks, aes(x=week, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+```
+
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-4-1.png" width="1000px" />
