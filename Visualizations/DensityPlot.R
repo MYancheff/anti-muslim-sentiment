@@ -87,6 +87,13 @@ ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type)) + geom_de
   
 ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity")
 
+join_2011$type <- as.factor(join_2011$type)
+
+print(levels(join_2011$type))
+
+join_2011$type = factor(join_2011$type,levels(join_2011$type)[c(2,1)])
+
+
 join_2011 <- filter(weeks, Year == "2011")
 join_2012 <- filter(weeks, Year == "2012")
 join_2013 <- filter(weeks, Year == "2013")
@@ -98,5 +105,6 @@ join1_2013 <- filter(new_new_join, Year == "2013")
 ggplot(data = join1_2011, aes(x=newdate, y=count, col=type)) + geom_line() +
   scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Daily Views")
 
-ggplot(data = join_2011, aes(x=weeks, y=count, fill=type, ), group=type) + geom_bar(stat = "identity", position = "identity") 
+ggplot(data = join_2011, aes(x=weeks, y=count, fill=type), group=type) + geom_bar(stat = "identity", position = "identity") 
+
 
