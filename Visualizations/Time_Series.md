@@ -211,7 +211,8 @@ ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3))
 <img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-1.png" width="1000px" />
 
 ``` r
-ggplot(data = join_2012, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+ggplot(data = join_2012, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca"), name="",
+                         labels=c("Islamophobia in media", "Anti-Muslim hate crimes")) + scale_color_manual(values=c("#bfd0e0", "#027aca"), guide=FALSE) + scale_alpha(guide=FALSE)
 ```
 
 <img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-2.png" width="1000px" />
