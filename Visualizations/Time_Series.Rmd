@@ -4,7 +4,7 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE, message = FALSE, warning = FALSE, error = FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, out.width='1000px', dpi=200)
 
 library(tidyverse)
 library(lubridate)
@@ -145,7 +145,7 @@ ggplot(data = new_join_month3, aes(x=Month, y=count, fill=type), group=type) +
 
 #This a line plot grouped by DAY
 
-ggplot(data = join_2011, aes(x=newdate, y=count, col=type)) + geom_line() +
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type)) + geom_line() +
   scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Count")
 
 ggplot(data = join_2012, aes(x=newdate, y=count, col=type)) + geom_line() +
@@ -169,6 +169,16 @@ ggplot(data = join_2013, aes(x=week, y=count, col=type)) + geom_line()
 
 ```
 
+### Filled density plot by DAY per YEAR  
+
+```{r}
+
+join_2011$type <- as.factor(join_2011$type)
+
+join_2011$type = factor(join_2011$type,levels(join_2011$type)[c(2,1)])
+
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+```
 
 
 

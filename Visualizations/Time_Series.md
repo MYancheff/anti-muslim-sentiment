@@ -40,7 +40,7 @@ coord_flip() +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/flip-1.png)
+<img src="Time_Series_files/figure-markdown_github/flip-1.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2012, aes(x=week, y=count, fill=type), group=type) + 
@@ -53,7 +53,7 @@ ggplot(data = join_2012, aes(x=week, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/flip-2.png)
+<img src="Time_Series_files/figure-markdown_github/flip-2.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2013, aes(x=week, y=count, fill=type), group=type) + 
@@ -66,7 +66,7 @@ ggplot(data = join_2013, aes(x=week, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/flip-3.png)
+<img src="Time_Series_files/figure-markdown_github/flip-3.png" width="1000px" />
 
 ### Bar chart grouped by WEEK
 
@@ -82,7 +82,7 @@ ggplot(data = join_2011, aes(x=week, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/noflip-1.png)
+<img src="Time_Series_files/figure-markdown_github/noflip-1.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2012, aes(x=week, y=count, fill=type), group=type) + 
@@ -94,7 +94,7 @@ ggplot(data = join_2012, aes(x=week, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/noflip-2.png)
+<img src="Time_Series_files/figure-markdown_github/noflip-2.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2013, aes(x=week, y=count, fill=type), group=type) + 
@@ -106,7 +106,7 @@ ggplot(data = join_2013, aes(x=week, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/noflip-3.png)
+<img src="Time_Series_files/figure-markdown_github/noflip-3.png" width="1000px" />
 
 ### Bar chart grouped by MONTH
 
@@ -120,7 +120,7 @@ ggplot(data = new_join_month1, aes(x=Month, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-1-1.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-1-1.png" width="1000px" />
 
 ``` r
 ggplot(data = new_join_month2, aes(x=Month, y=count, fill=type), group=type) + 
@@ -132,7 +132,7 @@ ggplot(data = new_join_month2, aes(x=Month, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-1-2.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-1-2.png" width="1000px" />
 
 ``` r
 ggplot(data = new_join_month3, aes(x=Month, y=count, fill=type), group=type) + 
@@ -144,32 +144,32 @@ ggplot(data = new_join_month3, aes(x=Month, y=count, fill=type), group=type) +
   scale_fill_discrete(name="Legend")
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-1-3.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-1-3.png" width="1000px" />
 
 ### Line chart grouped by DAY
 
 ``` r
 #This a line plot grouped by DAY
 
-ggplot(data = join_2011, aes(x=newdate, y=count, col=type)) + geom_line() +
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type)) + geom_line() +
   scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Count")
 ```
 
-![](Time_Series_files/figure-markdown_github/line-1.png)
+<img src="Time_Series_files/figure-markdown_github/line-1.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2012, aes(x=newdate, y=count, col=type)) + geom_line() +
   scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Count")
 ```
 
-![](Time_Series_files/figure-markdown_github/line-2.png)
+<img src="Time_Series_files/figure-markdown_github/line-2.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2013, aes(x=newdate, y=count, col=type)) + geom_line() +
   scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Count")
 ```
 
-![](Time_Series_files/figure-markdown_github/line-3.png)
+<img src="Time_Series_files/figure-markdown_github/line-3.png" width="1000px" />
 
 ### Line chart grouped by WEEK
 
@@ -179,16 +179,28 @@ ggplot(data = join_2013, aes(x=newdate, y=count, col=type)) + geom_line() +
 ggplot(data = join_2011, aes(x=week, y=count, col=type)) + geom_line() 
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-2-1.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-2-1.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2012, aes(x=week, y=count, col=type)) + geom_line() 
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-2-2.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-2-2.png" width="1000px" />
 
 ``` r
 ggplot(data = join_2013, aes(x=week, y=count, col=type)) + geom_line() 
 ```
 
-![](Time_Series_files/figure-markdown_github/unnamed-chunk-2-3.png)
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-2-3.png" width="1000px" />
+
+### Filled density plot by DAY per YEAR
+
+``` r
+join_2011$type <- as.factor(join_2011$type)
+
+join_2011$type = factor(join_2011$type,levels(join_2011$type)[c(2,1)])
+
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity") + theme_minimal() + scale_fill_manual(values=c("#bfd0e0", "#027aca")) + scale_color_manual(values=c("#bfd0e0", "#027aca"))
+```
+
+<img src="Time_Series_files/figure-markdown_github/unnamed-chunk-3-1.png" width="1000px" />
