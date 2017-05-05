@@ -14,6 +14,7 @@ new_fbi <- select(fbi_data, Incident_Date, Anti_Muslim)
 new_fbi <- filter(new_fbi, Anti_Muslim == "Y")
 new_new <- new_fbi %>% mutate(Year = year(Incident_Date), Month = month(Incident_Date), count = 1) 
 
+new_join_month <- new_joined %>% mutate(Month = month(newdate), count = 1)
 
 new_data$newdate <- strptime(as.character(new_data$Date), "%m/%d/%Y")
 
@@ -64,10 +65,38 @@ weeks <- new_new_join %>% mutate(week = (year(newdate) - year(min(newdate)))*52 
 
 
 ggplot(data = join_2011, aes(x=week, y=count, col=type), group=type) + geom_line() + scale_y_log10() 
-ggplot(data = join_2011, aes(x=week, y=count, fill=type), group=type) + geom_bar(stat = "identity", position = "identity") 
+ggplot(data = join_2011, aes(x=week, y=count, fill=type), group=type) + 
+  geom_bar(stat = "identity", position = "identity") +
+coord_flip() +
+  theme_minimal() +
+  labs(title = "Rate of Islamophobia in National Media 
+       and the Rate of Anti-Muslim Hate Crimes 
+       in the United States, 2011", x = "Week (1-52) of 2011", y = "Count") + 
+  scale_fill_discrete(name="Legend")
 
+ggplot(data = join_2012, aes(x=week, y=count, fill=type), group=type) + 
+  geom_bar(stat = "identity", position = "identity") +
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Rate of Islamophobia in National Media 
+       and the Rate of Anti-Muslim Hate Crimes 
+       in the United States, 2012", x = "Week (1-52) of 2012", y = "Count") + 
+  scale_fill_discrete(name="Legend")
 
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type)) + geom_density(stat = "identity") 
+  
+ggplot(data = join_2011, aes(x=newdate, y=count, col=type, fill=type, alpha=.3)) + geom_density(stat = "identity")
 
-join_2011 <- filter(fuck, Year == "2011")
-join_2012 <- filter(fuck, Year == "2012")
-join_2013 <- filter(fuck, Year == "2013")
+join_2011 <- filter(weeks, Year == "2011")
+join_2012 <- filter(weeks, Year == "2012")
+join_2013 <- filter(weeks, Year == "2013")
+
+join1_2011 <- filter(new_new_join, Year == "2011")
+join1_2012 <- filter(new_new_join, Year == "2012")
+join1_2013 <- filter(new_new_join, Year == "2013")
+
+ggplot(data = join1_2011, aes(x=newdate, y=count, col=type)) + geom_line() +
+  scale_x_date(date_labels = "%b %d") + xlab("") + ylab("Daily Views")
+
+ggplot(data = join_2011, aes(x=weeks, y=count, fill=type, ), group=type) + geom_bar(stat = "identity", position = "identity") 
+
