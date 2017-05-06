@@ -34,7 +34,7 @@ This is a part of the FBI Uniform Report on hate crimes, in the year 2013. Each 
   
 ####Question 1
   
-Create a function that discerns whether a line is a reporting agency, or an incident, and then divides the two into two other vectors. Some useful functions to remember here are: substr(), if().
+Create a function that discerns whether a line is a reporting agency, or an incident, and then divides the two into two other vectors. Some useful functions to remember here are: substr(), if(), for(). Remeber to first think about the internal logic of the function!
   
 ####Question 2
   
