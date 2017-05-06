@@ -23,7 +23,9 @@ Our analysis uses three sets of data: Census data from TK year, NIBRS FBI hate c
 *Dependent variable: Hate crime incidence*  
 
 State-level data on religiously-motivated anti-Muslim hate crimes is available from the Federal Bureau of Investigation’s Uniform Crime Reporting Program. On April 23, 1990, Congress passed the Hate Crime Statistics Act, 28 U.S.C. § 534, which required the Attorney General to collect data “about crimes that manifest evidence of prejudice based on race, religion, sexual orientation, or ethnicity.” Utilizing voluntary information from thousands of local and state law enforcement agencies, the UCR Program created a hate crime data collection to comply with the congressional mandate. Incident level data on hate crimes is available from the National Incident Based Reporting System (NIBRS).
-The official reports filed with the FBI are regarded as the “best source of national hate crime data,” and they are used commonly by researchers analyzing hate crimes (Levy 2016). Hate crimes include murder, non-negligent manslaughter, rape, aggravated assault, simple assault, intimidation, robbery, burglary, larceny-theft, motor vehicle theft, arson, destruction, damage, vandalism, and crimes against society (Federal Bureau of Investigation 2012).  
+The official reports filed with the FBI are regarded as the “best source of national hate crime data,” and they are used commonly by researchers analyzing hate crimes (Levy 2016). Hate crimes include murder, non-negligent manslaughter, rape, aggravated assault, simple assault, intimidation, robbery, burglary, larceny-theft, motor vehicle theft, arson, destruction, damage, vandalism, and crimes against society (Federal Bureau of Investigation 2012).
+  
+The data we received here was in a .txt format, and accompanied by a codebook explaining what each variable meant and where each one was.Each line in the .txt was either a reporting agency, or a hate crime incident; each character in that line was a different variable. Our job was to manage to transform it into a tidy .csv that could be one of the deliverables for our project.  We decided it was best to split the .txt into two .csv's, one for reporting agencies and the other for hate crime incidents, connected via the reporting agency ID Code. The resulting code is posted on our GitHub repo, and is openly available. 
 
 *Independent variable: Rate of anti-Muslim rhetoric in mainstream media*  
 
@@ -46,7 +48,21 @@ In order to bridge the gap between existing theoretical literature on anti-Musli
 
 *Null H1: The incidence of religiously-motivated anti-Muslim hate crimes will not increase with higher levels of anti-Muslim rhetoric in national mainstream media.*  
 
-This research estimates a regression model to analyze the impact of Islamophobic rhetoric in mainstream national media. We use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack.   
+To evaluate this hypothesis, we would use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack. This type of hypothesis testing is, however, beyond the scope of this class. 
+    
+There are also some problems associated with the data that make this test unfeesible, or at least less possible to provide us with a true correlation. First, the data is not ranked by the severity of the rhetoric; thus it seems to be waited towards publictions like The Hill, or Politico, which rather than being the most intense in their anti-muslim rhetoric, just produce a large amount of stories that are more likely to contain some offhand mention that is perceived by the algorithm as damadging. Second, our hate crime data show a very small amount of anti-muslim hate crimes committed; most states report zero, and those that do not--such as New York, New Jersey, or California--are populous states with a large general amount of hatecrimes, making it hard to produce a definitive model. Lastly, even if we had better data for hate crimes, the anti-muslim rhetoric data is country-wide, which makes it significntly harder to test for how much regional factors come into play.
+  
+Instead of this model, we ran a set of different linear models trying to discern the relationship between anti-muslim hate crimes and factors such as median income, muslim population, education rates, and crime rates. The results from these models were inconclusive, probably due to the large amount of zeros in the hate crime data. Our results showed that only the general hate crime rate coefficient achieves statistical significance at any level, for any year, and that the general rate of hate crimes is closely correlated with the general population of the state, and the crime rates.
+
+Our results here, of this very preliminary statistical analysis, by now means constitute a conclusive test of the data. However, through our project, we wish to offer the following results:
+
+*Tidy hatecrime report data, and the code used to tidy the FBI datasets. This can be easily transformed to read in any uniform FBI reporting data, and represents a bulk of our work*
+
+*Suggestions and observations on the data we had to work with. We have already offered parts of our analysis to ReThink Media, and believe that it presents several interesting points in which the data collection and analysis process might be streamlined*
+
+*Tidyied census data, that can be easily reproduced and used in future projects*
+
+*A github repository that reflects our work, and contains a large amount of handy visualizations and data transfigurations that might prove useful in the future*
 
 Appendix   
   A. Census Data Source    
