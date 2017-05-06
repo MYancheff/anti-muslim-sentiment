@@ -39,8 +39,8 @@ Crime incidence data is available from the FBI’s Uniform Crime Reporting Progr
 
 
 
-Hypothesis and Methodology  
--------------------------
+Modeling 
+--------
 
 In order to bridge the gap between existing theoretical literature on anti-Muslim hate crimes (Poynting and Perry 2007; Frost 2008) and empirical observations, we should test the following hypothesis:  
 
@@ -50,19 +50,22 @@ In order to bridge the gap between existing theoretical literature on anti-Musli
 
 To evaluate this hypothesis, we would use annual data from over three years (2011-2013) and rely on temporal correlation to identify the relationship between hate crime incidence and anti-Muslim sentiment. This is a common strategy to analyze the impact of events: Kaplan (2006) and King and Sutton (2013) utilize a similar method to test whether there is an increase in hate crime incidence following a terrorist attack. This type of hypothesis testing is, however, beyond the scope of this class. 
     
-There are also some problems associated with the data that make this test unfeesible, or at least less possible to provide us with a true correlation. First, the data is not ranked by the severity of the rhetoric; thus it seems to be waited towards publictions like The Hill, or Politico, which rather than being the most intense in their anti-muslim rhetoric, just produce a large amount of stories that are more likely to contain some offhand mention that is perceived by the algorithm as damadging. Second, our hate crime data show a very small amount of anti-muslim hate crimes committed; most states report zero, and those that do not--such as New York, New Jersey, or California--are populous states with a large general amount of hatecrimes, making it hard to produce a definitive model. Lastly, even if we had better data for hate crimes, the anti-muslim rhetoric data is country-wide, which makes it significntly harder to test for how much regional factors come into play.
+There are also some problems associated with the data that make this test unfeesible, or at least less probable to provide us with a true correlation. First, the data is not ranked by the severity of the rhetoric; thus it seems to be weighted towards publictions like The Hill, or Politico, which rather than being the most intense in their anti-muslim rhetoric, just produce a large amount of stories that are more likely to contain some offhand mention that is perceived by the algorithm as damadging. Second, our hate crime data show a very small amount of anti-muslim hate crimes committed; most states report zero, and those that do not--such as New York, New Jersey, or California--are populous states with a large general amount of hatecrimes, making it hard to produce a definitive model. Lastly, even if we had better data for hate crimes, the anti-muslim rhetoric data is country-wide, which makes it significntly harder to test for how much regional factors come into play.
   
 Instead of this model, we ran a set of different linear models trying to discern the relationship between anti-muslim hate crimes and factors such as median income, muslim population, education rates, and crime rates. The results from these models were inconclusive, probably due to the large amount of zeros in the hate crime data. Our results showed that only the general hate crime rate coefficient achieves statistical significance at any level, for any year, and that the general rate of hate crimes is closely correlated with the general population of the state, and the crime rates.
 
-Our results here, of this very preliminary statistical analysis, by now means constitute a conclusive test of the data. However, through our project, we wish to offer the following results:
+Conclusions
+-----------
 
-*Tidy hatecrime report data, and the code used to tidy the FBI datasets. This can be easily transformed to read in any uniform FBI reporting data, and represents a bulk of our work*
+Our results here, of this very preliminary statistical analysis, by no means constitute a conclusive test of the data. However, through our project, we wish to offer the following results:
 
-*Suggestions and observations on the data we had to work with. We have already offered parts of our analysis to ReThink Media, and believe that it presents several interesting points in which the data collection and analysis process might be streamlined*
+**Tidy hatecrime report data, and the code used to tidy the FBI datasets. This can be easily transformed to read in any uniform FBI reporting data, and represents a bulk of our work**
 
-*Tidyied census data, that can be easily reproduced and used in future projects*
+**Suggestions and observations on the data we had to work with. We have already offered parts of our analysis to ReThink Media, and believe that it presents several interesting points in which the data collection and analysis process might be streamlined**
 
-*A github repository that reflects our work, and contains a large amount of handy visualizations and data transfigurations that might prove useful in the future*
+**Tidyied census data and several visualizations--including maps and timeseries--that can be easily reproduced and used in future projects**
+
+**A github repository that reflects our work, and contains a large amount of handy visualizations and data transfigurations that might prove useful in the future**
 
 Appendix   
   A. Census Data Source    
