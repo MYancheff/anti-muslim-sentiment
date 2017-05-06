@@ -5,7 +5,7 @@ Emily Clark, Theodore Dounias, Kristina Kutateli
 Abstract
 ------------
 
-Does anti-Muslim and Islamophobic rhetoric in mainstream media affect the incidence of religiously motivated anti-Muslim hate crimes? Using annual data from ReThink Media on the daily rate of Islamophobia in mainstream national news from 2011 to 2013, we analyze whether higher rates of anti-Muslim rhetoric correlate with more frequent incidences of anti-Muslim hate crimes as recorded by the FBI. While others have found statistical evidence of increased hate crime incidence following terrorist attacks, none have provided an empirical exploration of the effect of mainstream media rhetoric. If events are correlated with increased hate crime rates, how mainstream news sources cover those events may have serious implications for hate crime incidence. Controlling for county Muslim population, average level of education, median income, and base crime rate using Census data from TK year, we find that TK TK. Findings confirm TK. These results provide some of the first quantitative evidence that TK.   
+Does anti-Muslim and Islamophobic rhetoric in mainstream media affect the incidence of religiously motivated anti-Muslim hate crimes? Using annual data from ReThink Media on the daily rate of Islamophobia in mainstream national news from 2011 to 2013, we analyze whether higher rates of anti-Muslim rhetoric correlate with more frequent incidences of anti-Muslim hate crimes as recorded by the FBI. While others have found statistical evidence of increased hate crime incidence following terrorist attacks, none have provided an empirical exploration of the effect of mainstream media rhetoric. If events are correlated with increased hate crime rates, how mainstream news sources cover those events may have serious implications for hate crime incidence. Controlling for county Muslim population, average level of education, median income, and base crime rate using state Census data, we wish to contribute to the study of this correlation. While our capacity to model the data is limited by the scope, timeframe, and actual data included in this study, our contribution rests more on the wrangling of our data, and the production of some preliminary results that might be helpful for ReThink media and other analysts.
 
 Existing literature 
 ----------------------
@@ -42,7 +42,7 @@ Crime incidence data is available from the FBI’s Uniform Crime Reporting Progr
 Hypothesis and Methodology  
 -------------------------
 
-In order to bridge the gap between existing theoretical literature on anti-Muslim hate crimes (Poynting and Perry 2007; Frost 2008) and empirical observations, we test the following hypothesis:  
+In order to bridge the gap between existing theoretical literature on anti-Muslim hate crimes (Poynting and Perry 2007; Frost 2008) and empirical observations, we should test the following hypothesis:  
 
 *H1. The incidence of religiously-motivated anti-Muslim hate crimes will increase with higher levels of anti-Muslim rhetoric in national mainstream media.*  
 
