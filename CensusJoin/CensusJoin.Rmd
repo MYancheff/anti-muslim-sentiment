@@ -260,6 +260,11 @@ Neater <- withincomeselect %>% rename(PopOver25 = SE_T025_001, LessThanHS25yrs =
 ```
 
 ```{r}
+data.frame()
+
+```
+
+```{r}
 write_csv(Neater, "Census.csv")
 
 ```

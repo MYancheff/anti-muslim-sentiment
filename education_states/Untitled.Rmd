@@ -1,0 +1,316 @@
+---
+title: "Education_States"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+---
+title: "CensusJoin"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(magrittr)
+library(readxl)
+library(xlsx)
+library(datasets)
+library(dplyr)
+library(magrittr)
+library(markdown)
+library(methods)
+library(readr)
+library(readxl)
+library(stringr)
+library(tibble)
+library(tidyr)
+
+```
+
+Import and tidy SocialExplorer data
+
+```{r, Alabama}
+
+```
+
+
+
+```{r, Alaska}
+
+
+```
+
+```{r, Arizona}
+
+
+```
+
+
+```{r, Arkansas}
+
+
+```
+
+```{r, California}
+
+
+```
+
+
+```{r, Colorado}
+
+
+
+```
+
+
+```{r, Connecticut}
+
+
+
+```
+
+```{r, Delaware}
+
+
+```
+
+```{r, Florida}
+
+
+```
+
+
+```{r, Georgia}
+
+
+
+```
+
+
+```{r, Hawaii}
+
+
+```
+
+```{r, Idaho}
+
+
+```
+
+```{r, Illinois}
+
+
+```
+
+```{r, Indiana}
+
+
+```
+
+```{r, Iowa}
+
+
+
+```
+
+
+```{r, Kansas}
+
+
+```
+
+
+```{r, Kentucky}
+
+
+```
+
+```{r, Louisiana}
+
+
+```
+
+
+```{r, Maine}
+
+
+```
+
+
+```{r, Maryland}
+
+
+```
+
+```{r, Massachusetts}
+
+
+```
+
+```{r, Michigan}
+
+
+
+```
+
+
+```{r, Minnesota}
+
+```
+
+```{r, Mississippi}
+
+
+```
+
+```{r, Missouri}
+
+
+```
+
+
+```{r, Montana}
+
+
+```
+
+
+```{r, Nebraska}
+
+
+
+```
+
+```{r, Nevada}
+
+
+```
+
+
+```{r, New Hampshire}
+
+
+
+```
+
+
+```{r, New Jersey}
+
+
+```
+
+```{r, New Mexico}
+
+
+```
+
+
+```{r, New York}
+
+
+```
+
+
+```{r, North Carolina}
+
+
+```
+
+
+```{r, North Dakota}
+
+
+```
+
+
+```{r, Ohio}
+
+
+```
+
+```{r, Oklahoma}
+
+
+```
+
+
+```{r, Oregon}
+
+
+```
+
+
+```{r, Pennsyvania}
+
+
+```
+
+```{r, Rhode Island}
+
+
+```
+
+```{r, South Carolina}
+
+
+```
+
+
+```{r, South Dakota}
+
+
+```
+
+
+```{r, Tennessee}
+
+
+```
+
+```{r, Texas}
+
+
+```
+
+```{r, Utah}
+
+
+```
+
+
+```{r, Vermont}
+
+
+```
+
+```{r, Virgina}
+
+
+```
+
+```{r, Washington}
+
+
+```
+
+```{r, West Virgina}
+
+
+```
+
+```{r, Wisconsin}
+
+
+```
+
+
+```{r, Wyoming}
+
+```
+
+
