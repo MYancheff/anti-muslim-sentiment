@@ -7,14 +7,15 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 
 library(tidyverse)
 library(lubridate)
 library(dplyr)
 
-full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013.txt", open = "r"), skipNul = TRUE)
+full_fbi <- readLines(file("data-raw\HC 2013 (1)\HC 2013.txt", open = "r"), skipNul = TRUE)
 
-incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_incidents_2011to13.csv")
+incidents_df <- read.csv("data\hatecrime_incidents_2011to13.csv")
 
 
 incidents_ex <- incidents_df %>%

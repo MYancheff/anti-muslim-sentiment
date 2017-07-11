@@ -1,7 +1,7 @@
 library(xlsx)
 library(tidyverse)
 
-neg_quotes <- read.xlsx2("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\GNI-HGTRP-Negative_Quotations.xls",
+neg_quotes <- read.xlsx2("data-raw\GNI-HGTRP-Negative_Quotations.xls",
                sheetIndex = 1, 
                as.data.frame = TRUE)
 

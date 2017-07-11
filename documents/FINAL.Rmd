@@ -65,6 +65,7 @@ Visualizations
 
 ```{r setup, include=FALSE, message = FALSE, warning = FALSE, error = FALSE}
 knitr::opts_chunk$set(echo = TRUE, out.width='1000px', dpi=200)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 
 library(tidyverse)
 library(lubridate)

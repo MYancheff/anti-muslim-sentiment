@@ -5,6 +5,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
 library(magrittr)
 library(readxl)
@@ -27,7 +28,7 @@ Import and tidy SocialExplorer data
 
 ```{r, Al to CO}
 
-RelALtoCO <- read_csv("/Users/emilyclark/Desktop/Junior/States/AltoCO.csv",
+RelALtoCO <- read_csv("data-raw/States/AltoCO.csv",
                       skip = 1)
 
 for(i in seq(from = 2, to = 939, by = 3)){
@@ -58,7 +59,7 @@ RelALtoCO <- t(RelALtoCO) %>%
 
 ```{r, CN to ILL}
 
-RelCNtoILL<- read_excel("/Users/emilyclark/Desktop/Junior/States/CNtoILL.xlsx", skip = 1, sheet = "Sheet1")
+RelCNtoILL<- read_excel("data-raw/States/CNtoILL.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to = 1420, by = 3)){
   names(RelCNtoILL)[i + 1] <- names(RelCNtoILL)[i]
@@ -82,7 +83,7 @@ RelCNtoILL <- t(RelCNtoILL) %>%
 
 ```{r, Indiana to Minnesota}
 
-RelINtoMI<- read_excel("/Users/emilyclark/Desktop/Junior/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
+RelINtoMI<- read_excel("data-raw/States/INtoMI.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to = 2063, by = 3)){
   names(RelINtoMI)[i + 1] <- names(RelINtoMI)[i]
@@ -107,7 +108,7 @@ RelINtoMI <- t(RelINtoMI) %>%
 
 
 ```{r, Mississippi to Washingtion}
-RelMISStoWA<- read_excel("/Users/emilyclark/Desktop/Junior/States/MISStoWA.xlsx", skip = 1, sheet = "Sheet1")
+RelMISStoWA<- read_excel("data-raw/States/MISStoWA.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to = 5079, by = 3)){
   names(RelMISStoWA)[i + 1] <- names(RelMISStoWA)[i]
@@ -131,7 +132,7 @@ RelMISStoWA <- t(RelMISStoWA) %>%
 ```
 
 ```{r, West Virgina to Wyoming}
-RelWVtoWY<- read_excel("/Users/emilyclark/Desktop/Junior/States/WeVtoWY.xlsx", skip = 1, sheet = "Sheet1")
+RelWVtoWY<- read_excel("data-raw/States/WeVtoWY.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to = 453, by = 3)){
   names(RelWVtoWY)[i + 1] <- names(RelWVtoWY)[i]
@@ -185,11 +186,11 @@ bind_state_summ2 <- bind_states_summ %>% #replace(county, "Parish", "County")
 Load data
 
 ```{r}
-crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/CrimeData.csv")
-education <-read_csv("/Users/emilyclark/Desktop/Junior/States/real_education.csv")
-population <- read_csv("/Users/emilyclark/Desktop/Junior/States/real_pop.csv")
-income <- read_csv("/Users/emilyclark/Desktop/Junior/States/Income.csv")
-FIPS <- read_csv("/Users/emilyclark/Desktop/Junior/States/FIPS.csv",
+crime <- read_csv("data-raw/States/CrimeData.csv")
+education <-read_csv("data-raw/States/real_education.csv")
+population <- read_csv("data-raw/States/real_pop.csv")
+income <- read_csv("data-raw/States/Income.csv")
+FIPS <- read_csv("data-raw/States/FIPS.csv",
                  skip = 1)
 
 ```
@@ -265,6 +266,6 @@ data.frame()
 ```
 
 ```{r}
-write_csv(Neater, "Census.csv")
+write_csv(Neater, "data/Census.csv")
 
 ```
