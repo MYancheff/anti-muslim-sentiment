@@ -3,10 +3,10 @@ library(lubridate)
 library(xlsx)
 
 #Read Incident Files
-incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_incidents_2011to13.csv")
-reporting_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_reporters_2011to13.csv")
-census_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\StateCensusTIDY.csv")
-FIPS_codes <- read.xlsx2("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\fips_codes_website.xls",
+incidents_df <- read.csv("data-raw/hatecrime_incidents_2011to13.csv")
+reporting_df <- read.csv("data-raw/hatecrime_reporters_2011to13.csv")
+census_df <- read.csv("data-raw/StateCensusTIDY.csv")
+FIPS_codes <- read.xlsx2("data-raw/fips_codes_website.xls",
                         sheetIndex = 1, 
                         as.data.frame = TRUE)
 

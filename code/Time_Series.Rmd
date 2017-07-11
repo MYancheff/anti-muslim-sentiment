@@ -4,6 +4,7 @@ output: github_document
 ---
 
 ```{r setup, include=FALSE, message = FALSE, warning = FALSE, error = FALSE}
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 knitr::opts_chunk$set(echo = TRUE, out.width='1000px', dpi=200)
 
 library(tidyverse)
@@ -18,7 +19,7 @@ library(lubridate)
 
 #Tidying different data sets
 
-new_join <- read_csv("new_join.csv")
+new_join <- read_csv("data/new_join.csv")
 
 new_new_join <- gather(new_join, key = type, value = count, Islamophobia, Anti_Muslim) #Creating "type" variable to plot both sets of data in one visualization
 

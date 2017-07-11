@@ -1,7 +1,7 @@
 library(readxl)
 library(tidyverse)
 
-data <- read_excel("rethinkdata.xlsx")
+data <- read_excel("data/rethinkdata.xlsx")
 
 colnames(data) <- as.character(unlist(data[1,]))
 data = data[-1, ]
@@ -9,7 +9,7 @@ data = data[-1, ]
 new_data <- select(data, Date, Islamophobia)
 new_rethink <- new_data %>% mutate (Year = year(mdy(Date)), Month = month (mdy(Date)))
 
-fbi_data <- read.csv("fbi.csv")
+fbi_data <- read.csv("data/fbi.csv")
 new_fbi <- select(fbi_data, Incident_Date, Anti_Muslim)
 new_fbi <- filter(new_fbi, Anti_Muslim == "Y")
 new_new <- new_fbi %>% mutate(Year = year(Incident_Date), Month = month(Incident_Date), count = 1) 

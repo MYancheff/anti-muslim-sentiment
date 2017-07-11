@@ -3,9 +3,9 @@ library(tidyr)
 library(lubridate)
 
 
-incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\hatecrime_incidents_2011to13.csv")
-reporting_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\hatecrime_reporters_2011to13.csv")
-popdata_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\Population_data.csv")
+incidents_df <- read.csv("data-raw/hatecrime_incidents_2011to13.csv")
+reporting_df <- read.csv("data-raw/hatecrime_reporters_2011to13.csv")
+popdata_df <- read.csv("data-raw/Population_data.csv")
 
 #Visualization 1
 viz1 <- incidents_df %>%

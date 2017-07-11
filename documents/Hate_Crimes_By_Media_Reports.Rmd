@@ -6,14 +6,14 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
 library(lubridate)
 library(foreign)
 library(readxl)
 
-setwd("~/Desktop/project/data")
-data <- read_excel("rethinkdata.xlsx")
-fbi_data <- read.csv("hatecrime_incidents_2011to13.csv")
+data <- read_excel("data/rethinkdata.xlsx")
+fbi_data <- read.csv("data-raw/hatecrime_incidents_2011to13.csv")
 
 
 ```

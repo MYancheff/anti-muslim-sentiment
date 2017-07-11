@@ -1,7 +1,7 @@
 library(xlsx)
 library(tidyverse)
 
-neg_quotes <- read.xlsx2("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\GNI-HGTRP-Negative_Quotations.xls",
+neg_quotes <- read.xlsx2("data-raw/GNI-HGTRP-Negative_Quotations.xls",
                sheetIndex = 1, 
                as.data.frame = TRUE)
 
@@ -35,5 +35,5 @@ neg_quotes$Publication[neg_quotes$Publication == "Politco"] <- "Politico"
 
 neg_quotes$First.Name[neg_quotes$First.Name == "Amdrew"] <- "Andrew"
 
-write.csv(neg_quotes, "Quotations_df_corrected.csv")
+write.csv(neg_quotes, "data/Quotations_df_corrected.csv")
 

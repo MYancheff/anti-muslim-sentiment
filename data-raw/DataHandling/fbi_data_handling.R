@@ -2,7 +2,7 @@ library(tidyverse)
 library(lubridate)
 library(dplyr)
 
-full_fbi <- readLines(file("C:\\Users\\tdounias\\Downloads\\HC 2013 (1)\\HC 2013.txt", open = "r"), skipNul = TRUE)
+full_fbi <- readLines(file("data-raw/HC 2013 (1)/HC 2013.txt", open = "r"), skipNul = TRUE)
 
 #Function that counts the nuber of incidents reported by each precinct
 count_incidents <- function(x){
@@ -240,5 +240,5 @@ read_var <- function(data, varname, start, end){
 incidents_full <- rbind(incidents_df_2011, incidents_df_2012, incidents_df_2013)
 reporting_full <- rbind(reporting_df_2011, reporting_df_2012, reporting_df_2013)
 
-write.csv(incidents_full, "hatecrime_incidents_2011to13.csv")
-write.csv(reporting_full, "hatecrime_reporters_2011to13.csv")
+write.csv(incidents_full, "data/hatecrime_incidents_2011to13.csv")
+write.csv(reporting_full, "data/hatecrime_reporters_2011to13.csv")

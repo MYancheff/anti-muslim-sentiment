@@ -5,6 +5,7 @@ output: html_document
 
 
 ```{r pressure, echo=FALSE}
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
 library(magrittr)
 library(readxl)
@@ -24,7 +25,7 @@ library(tidyr)
 
 ```{r, import State Data}
 
-RelState<- read_excel("/Users/emilyclark/Desktop/Junior/States/Rel_State.xlsx", skip = 1, sheet = "Sheet1")
+RelState<- read_excel("data-raw/States/Rel_State.xlsx", skip = 1, sheet = "Sheet1")
 
 for(i in seq(from = 2, to =  152, by = 3)){
   names(RelState)[i + 1] <- names(RelState)[i]
@@ -70,8 +71,8 @@ ReliState2 <- RelState %>%
 
 
 ```{r, load data}
-State_crime <- read_csv("/Users/emilyclark/Desktop/Junior/States/Crimes_state.csv") %>% mutate(Geo_Name = str_replace_all(Geo_Name, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
-ACS <-read_csv("/Users/emilyclark/Desktop/Junior/States/ACS_State.csv") %>% mutate(Geo_NAME = str_replace_all(Geo_NAME, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
+State_crime <- read_csv("data-raw/States/Crimes_state.csv") %>% mutate(Geo_Name = str_replace_all(Geo_Name, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
+ACS <-read_csv("data-raw/States/ACS_State.csv") %>% mutate(Geo_NAME = str_replace_all(Geo_NAME, " ", ".")) %>% mutate(Geo_Name = str_replace_all(Geo_Name, "of", "Of"))
 
 ```
 
@@ -103,6 +104,6 @@ StateCensus <- data.frame(StateCensus, "MuslimPopPer100000" = ( StateCensus$Adhe
 ```
 
 ```{r}
-write_csv(StateCensus, "StateCensusTIDY.csv")
+write_csv(StateCensus, "data/StateCensusTIDY.csv")
 
 ```

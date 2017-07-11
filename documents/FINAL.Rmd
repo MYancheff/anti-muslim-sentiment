@@ -70,7 +70,7 @@ knitr::opts_knit$set(root.dir = normalizePath("../"))
 library(tidyverse)
 library(lubridate)
 
-new_join <- read_csv("Visualizations/new_join.csv")
+new_join <- read_csv("data/new_join.csv")
 
 new_new_join <- gather(new_join, key = type, value = count, Islamophobia, Anti_Muslim) #Creating "type" variable to plot both sets of data in one visualization
 

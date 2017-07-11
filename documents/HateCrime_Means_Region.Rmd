@@ -7,6 +7,7 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = normalizePath("../"))
 
 library(tidyverse)
 library(tidyr)
@@ -25,9 +26,9 @@ This is by no means a complete analysis, but just an initial showcase of what co
 ```{r, cache = TRUE, warning= FALSE, error= FALSE}
 
 #Read Incident Files
-incidents_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_incidents_2011to13.csv")
-reporting_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\hatecrime_reporters_2011to13.csv")
-popdata_df <- read.csv("C:\\Users\\tdounias\\Desktop\\Reed College\\Spring 2017\\MATH 241\\Repositories\\anti-muslim_rhetoric\\data\\Population_data.csv")
+incidents_df <- read.csv("data-raw/hatecrime_incidents_2011to13.csv")
+reporting_df <- read.csv("data-raw/hatecrime_reporters_2011to13.csv")
+popdata_df <- read.csv("data-raw/Population_data.csv")
 
 #Create Dataset with regions and hatecrime numbers per year
 viz1 <- incidents_df %>%
